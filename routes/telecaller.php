@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\TeleCaller;
 use App\Http\Controllers\TeleCaller\HomeController;
+use DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Auth;
 use Artisan;
@@ -21,6 +23,6 @@ Route::group(['prefix' => 'telecaller'], function () {
             //phone number data
             Route::post('phone-suggestions', 'getPhoneSuggestions');
             Route::post('check-time-availability',  'checkTimeAvailability');
-        });
+        });       
     });
 });

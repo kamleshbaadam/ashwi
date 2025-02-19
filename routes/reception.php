@@ -20,5 +20,7 @@ Route::group(['prefix' => 'reception'], function () {
             // store record
             Route::post('add_appointment', 'addAppointment')->name('add_appointment');
         });
+
+        Route::get('view_opd_appointment',[AppointmentController::class,'view_opd_appointment']);
     });
 });

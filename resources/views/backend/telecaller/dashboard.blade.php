@@ -132,83 +132,12 @@
                                             </div>
                                         </div>
                                         <h6 class="col-sm-12">Morning</h6>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="10:00">
-                                            <span>10:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="10:10">
-                                            <span>10:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="10:20">
-                                            <span>10:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="10:30">
-                                            <span>10:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="10:40">
-                                            <span>10:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="10:50">
-                                            <span>10:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="11:00">
-                                            <span>11:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="11:10">
-                                            <span>11:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="11:20">
-                                            <span>11:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="11:30">
-                                            <span>11:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="11:40">
-                                            <span>11:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="11:50">
-                                            <span>11:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="12:00">
-                                            <span>12:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="12:10">
-                                            <span>12:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="12:20">
-                                            <span>12:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="12:30">
-                                            <span>12:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="12:40">
-                                            <span>12:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="12:50">
-                                            <span>12:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-2">
-                                            <input type="radio" name="time" class="timeRadio" value="13:00">
-                                            <span>13:00</span>
-                                        </div>
-
+                                        @foreach(['10:00', '10:10', '10:20', '10:30', '10:40', '10:50', '11:00', '11:10', '11:20', '11:30', '11:40', '11:50','12:00','12:10','12:20','12:30','12:40','12:50','13:00'] as $time)
+                                            <div class="col-md-1 mb-2">
+                                                <input type="radio" name="time" class="timeRadio" value="{{ $time }}">
+                                                <span>{{ $time }}</span>
+                                            </div>
+                                        @endforeach
                                         <div class="col-sm-12"></div>
                                         <div class="col-md-1" style="margin-top: 5px;">
                                             <input type="checkbox" id="waitingMorningCheckbox" style="margin-top: 10px;">
@@ -225,110 +154,12 @@
                                         <div class="col-sm-12">
                                             <h6>Evening</h6>
                                         </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="15:00">
-                                            <span>15:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="15:10">
-                                            <span>15:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="15:20">
-                                            <span>15:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="15:30">
-                                            <span>15:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="15:40">
-                                            <span>15:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="15:50">
-                                            <span>15:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="16:00">
-                                            <span>16:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="16:10">
-                                            <span>16:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="16:20">
-                                            <span>16:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="16:30">
-                                            <span>16:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="16:40">
-                                            <span>16:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="16:50">
-                                            <span>16:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="17:00">
-                                            <span>17:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="17:10">
-                                            <span>17:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="17:20">
-                                            <span>17:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="17:30">
-                                            <span>17:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="17:40">
-                                            <span>17:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="17:50">
-                                            <span>17:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:00">
-                                            <span>18:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:00">
-                                            <span>18:00</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:10">
-                                            <span>18:10</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:20">
-                                            <span>18:20</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:30">
-                                            <span>18:30</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:40">
-                                            <span>18:40</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="18:50">
-                                            <span>18:50</span>
-                                        </div>
-                                        <div class="col-md-1 mb-1">
-                                            <input type="radio" name="time" class="timeRadio" value="19:00">
-                                            <span>19:00</span>
-                                        </div>
+                                        @foreach(['15:00','15:10','15:20','15:30','15:40','15:50','16:00','16:10','16:20','16:30','16:40','16:50','17:00','17:10','17:20','17:30','17:40','17:50','18:00','18:00','18:10','18:20','18:30','18:40','18:50','19:00'] as $time)
+                                            <div class="col-md-1 mb-2">
+                                                <input type="radio" name="time" class="timeRadio" value="{{ $time }}">
+                                                <span>{{ $time }}</span>
+                                            </div>
+                                        @endforeach
                                         <div class="col-sm-12"></div>
                                         <div class="col-md-1" style="margin-top: 5px;">
                                             <input type="checkbox" id="waitingEveningCheckbox" style="margin-top: 10px;">
@@ -543,20 +374,20 @@
                         },
                         success: function(data) {
                             $('#patient_id').val('');
-                            var html = '<ul id="search_list">';
+                            var html = '<ul id="search_list" style="list-style: none; padding: 0; margin: 0;">';
+                            
                             $.each(data, function(k, v) {
-                                html +=
-                                    '<li class="su_Best_li btn btn-default" style="width:100%;" data-phone="' +
-                                    v.phone_no + '" data-name="' + v.name +
-                                    '" data-reference="' + v.reference_name +
-                                    '" data-id="patientli' + v.id + '" id="patientli' +
-                                    v.id + '" onClick="getPatientData(' + v.id +
-                                    ');">' + v.name + '</li>';
+                                html += `<li class="su_Best_li btn btn-default" style="width:100%; text-align:left;"
+                                            data-phone="${v.phone_no}" 
+                                            data-name="${v.name}" 
+                                            data-reference="${v.reference_name}" 
+                                            data-id="${v.id}">
+                                            ${v.name} (${v.phone_no})
+                                        </li>`;
                             });
 
-                            html += '</>';
+                            html += '</ul>';
                             $("#phoneNoSuggestions").html(html).show();
-                            // $('#search_list').html(html).show();
                         }
                     });
                 } else {
@@ -564,8 +395,24 @@
                 }
             });
 
+            // Handle click event on the suggestion list items
+            $(document).on('click', '.su_Best_li', function() {
+                let phone = $(this).data('phone');
+                let name = $(this).data('name');
+                let reference = $(this).data('reference');
+                let id = $(this).data('id');
+
+                $('input[name="phone_no"]').val(phone);
+                $('input[name="name"]').val(name);
+                $('input[name="reference"]').val(reference);
+                $('#patient_id').val(id); // Set hidden patient ID field
+
+                $('#phoneNoSuggestions').hide();
+            });
+
+            // Hide suggestions when clicking outside
             $(document).on('click', function(e) {
-                if (!$(e.target).closest('input[name="phone_no"], #search_list').length) {
+                if (!$(e.target).closest('input[name="phone_no"], #phoneNoSuggestions').length) {
                     $('#phoneNoSuggestions').hide();
                 }
             });
@@ -646,9 +493,6 @@
         });
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
         $(document).ready(function() {
             var dateInput = $('#appointment_date');
@@ -684,6 +528,4 @@
             });
         });
     </script>
-    
-    
 @endpush

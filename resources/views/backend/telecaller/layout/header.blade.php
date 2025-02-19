@@ -304,26 +304,12 @@
                                         <div class="logged-user-avatar-info">
                                             <div class="avatar-w"><img alt=""  src="{{ asset('backend/telecaller/img/Dr-Mihir-Metha-ENT-1.jpg') }}"></div>
                                             <div class="logged-user-info-w">
-                                                <div class="logged-user-name">Dr.Mihir Mehta</div>
-                                                <div class="logged-user-role">Administrator</div>
+                                                <div class="logged-user-name">{{$userData->first_name . ' ' . $userData->last_name}}</div>
+                                                <div class="logged-user-role">{{ ucwords($userData->role) }}</div>
                                             </div>
                                         </div>
                                         <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                         <ul>
-                                            <li><a href="javascript:"><i
-                                                        class="os-icon os-icon-mail-01"></i><span>Incoming
-                                                        Mail</span></a>
-                                            </li>
-                                            <li><a href="javascript:"><i
-                                                        class="os-icon os-icon-user-male-circle2"></i><span>Profile
-                                                        Details</span></a></li>
-                                            <li><a href="users_profile_small.html"><i
-                                                        class="os-icon os-icon-coins-4"></i><span>Billing
-                                                        Details</span></a>
-                                            </li>
-                                            <li><a href="#"><i
-                                                        class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
-                                            </li>
                                             <li>
                                                 <a href="javascript:" onclick="logoutfun();">
                                                     <i class="os-icon os-icon-signs-11"></i>
@@ -349,6 +335,12 @@
                             <div class="icon-w">
                                 <div class="os-icon os-icon-layers"></div>
                             </div><span>Appointment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:" onclick="logoutfun();">
+                            <i class="os-icon os-icon-signs-11"></i>
+                            <span>Logout</span>
                         </a>
                     </li>
                 </ul>
