@@ -94,6 +94,7 @@ class OpdMaster extends Model
 
         $newArr->investigation=$req->investigation;
         $newArr->advise=$req->advise;
+        $newArr->status=1;
         $newArr->billing=$req->billing;
         $newArr->surgery=$req->surgery;
         $newArr->admit=$req->admit;

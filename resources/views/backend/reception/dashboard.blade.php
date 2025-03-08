@@ -58,15 +58,18 @@
                                                 <td>{{ date('H:i A', strtotime($opd->created_at)) }}</td>
                                                 <td>
                                                     @if ($opd->status == '0')
-                                                        @if (!empty($opd->waiting_time) || $opd->waiting_time != '00:00:00')
+                                                        {{-- @if (!empty($opd->waiting_time) || $opd->waiting_time != '00:00:00')
                                                             <span class="status-pill smaller yellow"></span>
                                                             <span>Pending
                                                             </span>
                                                             <br>({{ date('H:i', strtotime($opd->waiting_time)) }})
-                                                        @endif
-                                                    @else
+                                                        @endif --}}
                                                         <span class="status-pill smaller red"></span>
                                                         <span>In Queue</span>
+                                                    @else
+                                                        <span class="status-pill smaller green"></span>
+                                                        <span>Complete</span>
+
                                                     @endif
                                                 </td>
                                                 <td class="row-actions">
@@ -182,4 +185,11 @@
                 </div>
                 <div class="display-type"></div>
             </div>
-        @endsection
+        </div>
+    </div>
+    <script>
+            setInterval(function() {
+                window.location.reload();
+            }, 20000); // in ms
+    </script>
+@endsection
