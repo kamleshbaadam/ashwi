@@ -287,7 +287,7 @@
              menu-layout-compact sub-menu-style-over 
              sub-menu-color-bright selected-menu-color-bright 
              menu-activated-on-hover menu-has-selected-link">
-            <div class="logo-w"><a class="logo" href="Dr_panel.html">
+            <div class="logo-w"><a class="logo" href="#">
                     <div class="logo-element"></div>
                     <div class="logo-label">Aashwi Hospital</div>
                 </a></div>
@@ -309,20 +309,6 @@
                                     </div>
                                     <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                     <ul>
-                                        <li><a href="apps_email.html"><i
-                                                    class="os-icon os-icon-mail-01"></i><span>Incoming
-                                                    Mail</span></a>
-                                        </li>
-                                        <li><a href="users_profile_big.html"><i
-                                                    class="os-icon os-icon-user-male-circle2"></i><span>Profile
-                                                    Details</span></a></li>
-                                        <li><a href="users_profile_small.html"><i
-                                                    class="os-icon os-icon-coins-4"></i><span>Billing
-                                                    Details</span></a>
-                                        </li>
-                                        <li><a href="#"><i
-                                                    class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
-                                        </li>
                                         <li>
                                             <a href="javascript:" onclick="logoutfun();">
                                                 <i class="os-icon os-icon-signs-11"></i>
@@ -359,10 +345,10 @@
                         <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                         <div class="sub-menu-i">
                             <ul class="sub-menu">
-                                <li><a href="/appointment">Appointment </a></li>
+                                <li><a href="{{url('reception/view_opd_appointment')}}">Appointment </a></li>
 
-                                <li><a href="/add-new-opd">Add patient</a></li>
-                                <li><a href="/temporary-appointment">Temporary Appointment</a></li>
+                                <li><a href="{{url('reception/edit-appointment')}}">Add patient</a></li>
+                                <li><a href="{{url('reception/temporary-appointment')}}">Temporary Appointment</a></li>
 
                             </ul>
                         </div>
@@ -378,10 +364,10 @@
                         <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                         <div class="sub-menu-i">
                             <ul class="sub-menu">
-                                <li><a href="/ot-management">OT Management</a></li>
-                                <li><a href="/ot-schedule">OT Schedule</a></li>
-                                <li><a href="/opd-patients">OPD</a></li>
-                                <li><a href="/ipd-patients">IPD</a></li>
+                                <li><a href="{{url('reception/ot-management')}}">OT Management</a></li>
+                                <li><a href="{{url('reception/ot-schedule')}}">OT Schedule</a></li>
+                                <li><a href="{{url('reception/opd-patients')}}">OPD</a></li>
+                                <li><a href="{{url('reception/ipd-patients')}}">IPD</a></li>
                             </ul>
                         </div>
                     </div>
@@ -397,14 +383,14 @@
                         <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                         <div class="sub-menu-i">
                             <ul class="sub-menu">
-                                <li><a href="/deluxe-ward">Dulux Ward </a></li>
-                                <li><a href="/atd">ATD</a></li>
-                                <li><a href="/ward">Ward List</a></li>
-                                <li><a href="/add-ward">Add ward</a></li>
-                                <li><a href="/add-bed">Add Bed</a></li>
-                                <li><a href="/bed-list">Bed List</a></li>
-                                <li><a href="/bed-assign">Bed Assign</a></li>
-                                <li><a href="/bed-assign-list">Bed Assign LIst</a></li>
+                                <li><a href="{{url('reception/deluxe-ward')}}">Dulux Ward </a></li>
+                                <li><a href="{{url('reception/atd')}}">ATD</a></li>
+                                <li><a href="{{url('reception/ward')}}">Ward List</a></li>
+                                <li><a href="{{url('reception/add-ward')}}">Add ward</a></li>
+                                <li><a href="{{url('reception/add-bed')}}">Add Bed</a></li>
+                                <li><a href="{{url('reception/bed-list')}}">Bed List</a></li>
+                                <li><a href="{{url('reception/bed-assign')}}">Bed Assign</a></li>
+                                <li><a href="{{url('reception/bed-assign-list')}}">Bed Assign LIst</a></li>
 
 
                             </ul>
@@ -422,11 +408,11 @@
                         <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                         <div class="sub-menu-i">
                             <ul class="sub-menu">
-                                <li><a href="/out-patient-invoice">Out Patient Invoice</a></li>
-                                <li><a href="/out-patient-receipt">Out Patient Receipt</a></li>
-                                <li><a href="/inpatients-advance">Inpatients Advance</a></li>
-                                <li><a href="/in-patient-case-memo">IN Patient Case Memo</a></li>
-                                <li><a href="/add-ipd-advance">Add IPD Advance</a></li>
+                                <li><a href="{{url('reception/out-patient-invoice')}}">Out Patient Invoice</a></li>
+                                <li><a href="{{url('reception/out-patient-receipt')}}">Out Patient Receipt</a></li>
+                                <li><a href="{{url('reception/inpatients-advance')}}">Inpatients Advance</a></li>
+                                <li><a href="{{url('reception/in-patient-case-memo')}}">IN Patient Case Memo</a></li>
+                                <li><a href="{{url('reception/add-ipd-advance')}}">Add IPD Advance</a></li>
 
 
 
@@ -445,12 +431,12 @@
                         <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                         <div class="sub-menu-i">
                             <ul class="sub-menu">
-                                <li><a href="/3c-report">3C report</a></li>
-                                <li><a href="/ipd-report">IPD Report</a></li>
-                                <li><a href="/collection-report">collection report</a></li>
-                                <li><a href="/daily-collection">Daily collection</a></li>
-                                <li><a href="/billing-overall-report">billing_overall report</a></li>
-                                <li><a href="/master-date">Master Date</a></li>
+                                <li><a href="{{url('reception/3c-report')}}">3C report</a></li>
+                                <li><a href="{{url('reception/ipd-report')}}">IPD Report</a></li>
+                                <li><a href="{{url('reception/collection-report')}}">collection report</a></li>
+                                <li><a href="{{url('reception/daily-collection')}}">Daily collection</a></li>
+                                <li><a href="{{url('reception/billing-overall-report')}}">billing_overall report</a></li>
+                                <li><a href="{{url('reception/master-date')}}">Master Date</a></li>
                             </ul>
                         </div>
                     </div>

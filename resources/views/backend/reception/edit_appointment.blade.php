@@ -251,7 +251,8 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">Mediclaim</label>
                                                             <select class="form-control" name="mediclaim" required>
-                                                            <option selected
+                                                            <option selected disabled value="">--</option>
+                                                            <option
                                                             @if (!empty($appointment)) @if($appointment['mediclaim']=='0') selected
                                                             @endif @endif value="0">Yes</option>
                                                             <option @if (!empty($appointment)) @if($appointment['mediclaim']=='1') selected

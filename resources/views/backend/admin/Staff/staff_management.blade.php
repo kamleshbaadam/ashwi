@@ -23,6 +23,7 @@
                                         <th>Sr</th>
                                         <th>Staff Name</th>
                                         <th>Role</th>
+                                        <th>Email</th>
                                         <th>Phone no</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -42,7 +43,8 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ ucfirst($val['role']) }}</td>
-                                                <td>0987654321</td>
+                                                <td>{{ $val['email'] }}</td>
+                                                <td>{{ $val['mobile'] }}</td>
                                                 <td class="nowrap">
                                                     <span class="status-pill smaller green"></span><span>Active</span>
                                                 </td>

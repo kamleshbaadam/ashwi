@@ -206,6 +206,7 @@
                                     <th>Appointment Date</th>
                                     <th>Status</th>
                                     <th>Remark</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -254,6 +255,20 @@
                                             @else
                                                 Not Provided
                                             @endif
+                                        </td>
+                                        <td style="display: flex;font-size: 20px;">
+                                            <a href="{{ url('telecaller/edit-appointment/' . $appointment->id) }}"
+                                                type="button" name="submit"><i class="os-icon os-icon-ui-49"
+                                                    style="color: black;"></i><span></span></a>
+                                            <form action="{{ url('telecaller/view-appointment/' . $appointment->id) }}"
+                                                style="padding-left: 5px;" method="post"
+                                                onsubmit="return confirm('Are you sure you want to delete this appointment?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" name="submit" style="border:none">
+                                                    <i class="os-icon os-icon-ui-15"><span></span></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

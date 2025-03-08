@@ -50,7 +50,7 @@ class OpdMaster extends Model
         ->leftJoin('patient_master as p','p.id', '=', 'opd_master.patient_id')
         ->leftJoin('staff_master as d','d.id','=','opd_master.doctor_id')
         ->orderBy('opd_master.id','ASC')
-        ->take(10)
+        // ->take(10)
         ->get();
     }
 
