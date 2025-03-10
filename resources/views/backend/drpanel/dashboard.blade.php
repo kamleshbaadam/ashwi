@@ -15,56 +15,55 @@
             <div class="content-i">
                 <div class="content-box">
                     <!-- <div class="element-wrapper compact ">
-
-                                        <div class="row pt-2">
-                                            <div class="col-6 col-sm-3 col-xxl-2"><a
-                                                    class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                                    <div class="label">Total Patients</div>
-                                                    <div class="value">484</div>
-                                                    <div class="trending trending-up"><span>12%</span><i
-                                                            class="os-icon os-icon-arrow-up6"></i></div>
-                                                </a></div>
-                                            <div class="col-6 col-sm-3 col-xxl-2"><a
-                                                    class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                                    <div class="label">OPD</div>
-                                                    <div class="value text-danger">3,248</div>
-                                                    <div class="trending trending-down"><span>12%</span><i
-                                                            class="os-icon os-icon-arrow-down6"></i></div>
-                                                </a></div>
-                                            <div class="col-6 col-sm-3 col-xxl-2"><a
-                                                    class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                                    <div class="label">Total Staff</div>
-                                                    <div class="value">73</div>
-                                                    <div class="trending trending-up"><span>12%</span><i
-                                                            class="os-icon os-icon-arrow-up6"></i></div>
-                                                </a></div>
-                                            <div class="col-6 col-sm-3 col-xxl-2"><a
-                                                    class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                                    <div class="label">Total Booking</div>
-                                                    <div class="value">1,284</div>
-                                                    <div class="trending trending-up"><span>12%</span><i
-                                                            class="os-icon os-icon-arrow-up6"></i></div>
-                                                </a></div>
-                                            <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
-                                                    class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                                    <div class="label">Bed</div>
-                                                    <div class="value">473</div>
-                                                    <div class="trending trending-down"><span>5%</span><i
-                                                            class="os-icon os-icon-arrow-down6"></i></div>
-                                                </a></div>
-                                            <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
-                                                    class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                                    <div class="label">Total HRM</div>
-                                                    <div class="value">248</div>
-                                                    <div class="trending trending-down"><span>12%</span><i
-                                                            class="os-icon os-icon-arrow-down6"></i></div>
-                                                </a></div>
-                                        </div>
-                                    </div> -->
+                            <div class="row pt-2">
+                                <div class="col-6 col-sm-3 col-xxl-2"><a
+                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                        <div class="label">Total Patients</div>
+                                        <div class="value">484</div>
+                                        <div class="trending trending-up"><span>12%</span><i
+                                                class="os-icon os-icon-arrow-up6"></i></div>
+                                    </a></div>
+                                <div class="col-6 col-sm-3 col-xxl-2"><a
+                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                        <div class="label">OPD</div>
+                                        <div class="value text-danger">3,248</div>
+                                        <div class="trending trending-down"><span>12%</span><i
+                                                class="os-icon os-icon-arrow-down6"></i></div>
+                                    </a></div>
+                                <div class="col-6 col-sm-3 col-xxl-2"><a
+                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                        <div class="label">Total Staff</div>
+                                        <div class="value">73</div>
+                                        <div class="trending trending-up"><span>12%</span><i
+                                                class="os-icon os-icon-arrow-up6"></i></div>
+                                    </a></div>
+                                <div class="col-6 col-sm-3 col-xxl-2"><a
+                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                        <div class="label">Total Booking</div>
+                                        <div class="value">1,284</div>
+                                        <div class="trending trending-up"><span>12%</span><i
+                                                class="os-icon os-icon-arrow-up6"></i></div>
+                                    </a></div>
+                                <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
+                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                        <div class="label">Bed</div>
+                                        <div class="value">473</div>
+                                        <div class="trending trending-down"><span>5%</span><i
+                                                class="os-icon os-icon-arrow-down6"></i></div>
+                                    </a></div>
+                                <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
+                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                        <div class="label">Total HRM</div>
+                                        <div class="value">248</div>
+                                        <div class="trending trending-down"><span>12%</span><i
+                                                class="os-icon os-icon-arrow-down6"></i></div>
+                                    </a></div>
+                            </div>
+                        </div> -->
                     <div class="element-wrapper">
 
-                        <div class="element-actions"><a class="btn btn-success btn-sm" href="/drpanel/opd"><i
-                                    class="os-icon os-icon-grid-10"></i><span>ViewAppoinments </span></a>
+                        <div class="element-actions"><a class="btn btn-success btn-sm" href="{{url('/doctor/currunt-opd')}}"><i
+                                    class="os-icon os-icon-grid-10"></i><span>View Appoinments </span></a>
                         </div>
                         <h6 class="element-header">OPD Appointment</h6>
                         <div class="element-box-tp">
@@ -97,12 +96,6 @@
                                                 <td>{{ date('H:i A', strtotime($opd->created_at)) }}</td>
                                                 <td>
                                                     @if ($opd->status == '0')
-                                                        {{-- @if (!empty($opd->waiting_time) || $opd->waiting_time != '00:00:00')
-                                                            <span class="status-pill smaller yellow"></span>
-                                                            <span>Pending
-                                                            </span>
-                                                            <br>({{ date('H:i', strtotime($opd->waiting_time)) }})
-                                                        @endif --}}
                                                         <span class="status-pill smaller red"></span>
                                                         <span>In Queue</span>
                                                     @else
@@ -117,9 +110,9 @@
                                                             style="color: white;"><span>
                                                                 <i class="os-icon os-icon-grid-10"></i></span></a>
                                                     </div>
+                                                </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -137,8 +130,7 @@
                                                 <th>Sr</th>
                                                 <th>Patient Id</th>
                                                 <th>IPD NO</th>
-                                                <th>PATIENT
-                                                </th>
+                                                <th>PATIENT</th>
                                                 <th>REFERENCE</th>
                                                 <th>DOCTOR </th>
                                                 <th>ADMISSION DATE</th>
