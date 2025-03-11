@@ -1,4 +1,4 @@
-@extends('backend.telecaller.layout.app')
+@extends('backend.reception.layout.app')
 
 @push('title')
     <title>Edit Appointment</title>
@@ -135,7 +135,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">First visit date</label>
                                                         <input class="form-control" type="date"
-                                                            placeholder="contant Number" > 
+                                                            placeholder="contant Number" value="{{ !empty($appointment['first_visit_date']) ? date('Y-m-d', strtotime($appointment['first_visit_date'])) : '' }}"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -147,7 +147,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Appointment Time</label>
                                                         <input class="form-control" type="time" name="appointment_time" required
-                                                            value="{{ !empty($appointment['appointment_time']) ? date('H:i', strtotime($appointment['appointment_time'])) : '' }}">
+                                                            value="{{ !empty($appointment['appointment_date']) ? date('H:i', strtotime($appointment['appointment_date'])) : '' }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -217,7 +217,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">Last Visit</label>
                                                         <input class="form-control" type="date" required
-                                                            placeholder="Last Visit">
+                                                            placeholder="Last Visit" value="{{ !empty($appointment['last_visit_date']) ? date('Y-m-d', strtotime($appointment['last_visit_date'])) : '' }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -252,11 +252,8 @@
                                                     <div class="form-group"><label for="">Mediclaim</label>
                                                             <select class="form-control" name="mediclaim" required>
                                                             <option selected disabled value="">--</option>
-                                                            <option
-                                                            @if (!empty($appointment)) @if($appointment['mediclaim']=='0') selected
-                                                            @endif @endif value="0">Yes</option>
-                                                            <option @if (!empty($appointment)) @if($appointment['mediclaim']=='1') selected
-                                                            @endif @endif value="1">No</option>
+                                                            <option value="0" {{ (!empty($appointment) && $appointment['mediclaim'] == '0') ? 'selected' : '' }}>Yes</option>
+                                                            <option value="1" {{ (!empty($appointment) && $appointment['mediclaim'] == '1') ? 'selected' : '' }}>No</option>
                                                         </select></div>
                                                 </div>
                                                 <div class="col-sm-8">

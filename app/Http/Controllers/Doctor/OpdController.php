@@ -36,7 +36,7 @@ class OpdController extends BaseController
             $this->opdMedicine = $opdMedicine;
             $this->opdReport = $opdReport;
             $this->historyData = $historyData;
-			return view('backend.drpanel.add_opd_newpage', $this->data);
+			return view('backend.drpanel.view_opd_appointment', $this->data);
 
 		} catch (\Exception $e) {
 			return redirect()->back()->with('error',  $e->getMessage());

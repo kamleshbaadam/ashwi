@@ -70,6 +70,17 @@ class HomeController extends BaseController
 			$appointment = Appointment::getAppointmentByID($id);
 			if (!empty($appointment->patient_id)) {
 				$patientData = PatientMaster::getPatientByID($appointment->patient_id);
+				// Get first and last visit dates
+				$firstVisit = Appointment::where('patient_id', $appointment->patient_id)
+					->orderBy('appointment_date', 'asc')
+					->first();
+					
+				$lastVisit = Appointment::where('patient_id', $appointment->patient_id)
+					->orderBy('appointment_date', 'desc') 
+					->first();
+					
+				$appointment->first_visit_date = $firstVisit ? $firstVisit->appointment_date : null;
+				$appointment->last_visit_date = $lastVisit ? $lastVisit->appointment_date : null;
 			}
 			$this->opd_id = null;
 			$this->appointment_id = $id;
@@ -90,7 +101,20 @@ class HomeController extends BaseController
 			$appointment = OpdMaster::getOpdByID($id);
 			if (!empty($appointment->patient_id)) {
 				$patientData = PatientMaster::getPatientByID($appointment->patient_id);
+				
+				// Get first and last OPD dates for this patient
+				$firstOpd = OpdMaster::where('patient_id', $appointment->patient_id)
+					->orderBy('appointment_date', 'asc')
+					->first();
+					
+				$lastOpd = OpdMaster::where('patient_id', $appointment->patient_id)
+					->orderBy('appointment_date', 'desc')
+					->first();
+					
+				$appointment->first_visit_date = $firstOpd ? $firstOpd->appointment_date : null;
+				$appointment->last_visit_date = $lastOpd ? $lastOpd->appointment_date : null;
 			}
+			
 			$this->patientData = $patientData;
 			$this->doctorData = $doctorList;
 			$this->appointment = $appointment;

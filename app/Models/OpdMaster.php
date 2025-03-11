@@ -44,15 +44,19 @@ class OpdMaster extends Model
 
         return $opdArr;
     }
-    public static function getRecordPatientMasterOpdMaster($user_id=0){
-        return OpdMaster::selectRaw('opd_master.*, p.patient_id, p.first_name, p.phone_no, p.middle_name, p.last_name, p.reference_name, 
+    public static function getRecordPatientMasterOpdMaster($user_id=0)
+    {
+        $date = date('Y-m-d');
+        $query = OpdMaster::selectRaw('opd_master.*, p.patient_id, p.first_name, p.phone_no, p.middle_name, p.last_name, p.reference_name, 
         d.first_name as d_first_name, d.last_name as d_last_name')
         ->leftJoin('patient_master as p','p.id', '=', 'opd_master.patient_id')
         ->leftJoin('staff_master as d','d.id','=','opd_master.doctor_id')
-        ->orderBy('opd_master.id','ASC')
-        ->where('opd_master.doctor_id',$user_id)
-        ->take(10)
-        ->get();
+        ->orderBy('opd_master.status','ASC')
+        ->where('opd_master.appointment_date',$date);
+        if($user_id) {
+            $query->where('opd_master.doctor_id', $user_id);
+        }
+        return $query->take(10)->get();
     }
 
     public static function getHistoryByOPDIdandPatientId($patient_id,$opd_id){

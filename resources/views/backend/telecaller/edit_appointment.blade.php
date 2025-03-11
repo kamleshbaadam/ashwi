@@ -119,6 +119,7 @@
 
                                         <textarea class="form-control" name="remark" rows="1" placeholder="Remark">{{  $appointment->remark }}</textarea>
                                     </div>
+
                                 </div>
                                 <div class="col-sm-11 text-right">
                                     <div class="">
@@ -136,3 +137,4 @@
         <div class="display-type"></div>
     </div>
 @endsection
+

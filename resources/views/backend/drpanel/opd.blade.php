@@ -21,47 +21,39 @@
                             <div class="element-box-tp">
                                 <div class="table-responsive">
                                     <table class="table table-padded">
-                                        <thead>
+                                        <thead class="text-center">
                                             <tr>
                                                 <th>SR</th>
-                                                <th>patient_ID</th>
-                                                <th>Name </th>
+                                                <th>patient ID</th>
                                                 <th>REFERENCE</th>
-                                                <th>Case_type</th>
-                                                <th>complain</th>
+                                                <th>Name</th>
+                                                <th>Case no</th>
+                                                <th>Case type</th>
+                                                <th>Appointment Time</th>
+                                                <th>Arrival Time</th>
+                                                <th>ACTION</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="text-center">
                                             @foreach ($opdData as $opd)
-                                                @if($opd->status == 0)
-                                                    <tr>
-                                                        <td class="text-center">{{$loop->iteration}}</td>
-
-                                                        <td class="text-center">{{$opd->patient_id}}</td>
-
-                                                        <td>
-                                                            <div class="user-with-avatar">
-                                                                <img alt=""
-                                                                src="{{ asset('backend/drpanel/img/avatar1.png') }}"><span>{{$opd->first_name}} {{$opd->last_name}}</span></div>
-                                                        </td>
-                                                        <td>{{$opd->reference_name}}</td>
-                                                        <td>
-                                                            <div class="smaller lighter">{{$opd->case_type}}</div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="smaller lighter">{{$opd->complain}}</div>
-                                                        </td>
-                                                        <td class="">
-                                                            <div class="">
-                                                                <a class="btn btn-primary btn-primary"
-                                                                    href="{{url('doctor/view-opdAppointment/'.$opd->id)}}" style="color: white;"><span>
-                                                                        Start</span></a>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                @endif
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $opd['patient_id'] }}</td>
+                                                    <td>{{ $opd['reference_name'] }}</td>
+                                                    <td>{{ $opd['first_name'] . ' ' . $opd['last_name'] }}</td>
+                                                    <td>{{ $opd['case_no'] }}</td>
+                                                    <td>{{ ucwords($opd['case_type']) }}</td>
+                                                    <td>{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
+                                                    <td>{{ date('H:i A', strtotime($opd->created_at)) }}</td>
+                                                    <td class="">
+                                                        <div class="">
+                                                            <a class="btn btn-primary btn-primary"
+                                                                href="{{ url('doctor/view-opdAppointment/' . $opd->id) }}"
+                                                                style="color: white;"><span>
+                                                                    <i class="os-icon os-icon-grid-10"></i></span></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -73,44 +65,30 @@
                             <div class="element-box-tp">
                                 <div class="table-responsive">
                                     <table class="table table-padded">
-                                        <thead>
+                                        <thead class="text-center">
                                             <tr>
                                                 <th>SR</th>
-                                                <th>patient_ID</th>
-                                                <th>Name </th>
+                                                <th>patient ID</th>
                                                 <th>REFERENCE</th>
-                                                <th>Case_type</th>
-                                                <th>complain</th>
+                                                <th>Name</th>
+                                                <th>Case no</th>
+                                                <th>Case type</th>
+                                                <th>Appointment Time</th>
+                                                <th>Arrival Time</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="text-center">
                                             @foreach ($opdData as $opd)
-                                                @if($opd->status == 1)
-                                                    <tr>
-                                                        <td class="text-center">{{$loop->iteration}}</td>
-
-                                                        <td class="text-center">{{$opd->patient_id}}</td>
-
-                                                        <td>
-                                                            <div class="user-with-avatar">
-                                                                <img alt=""
-                                                                src="{{ asset('backend/drpanel/img/avatar1.png') }}"><span>{{$opd->first_name}} {{$opd->last_name}}</span></div>
-                                                        </td>
-                                                        <td>{{$opd->reference_name}}</td>
-                                                        <td>
-                                                            <div class="smaller lighter">{{$opd->case_type}}</div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="smaller lighter">{{$opd->complain}}</div>
-                                                        </td>
-                                                        <td class="row-actions"><a href="#"><i
-                                                            class="os-icon os-icon-grid-10"></i></a><a
-                                                        href="#"><i class="os-icon os-icon-ui-44"></i></a><a
-                                                        class="danger" href="#"><i
-                                                            class="os-icon os-icon-ui-15"></i></a></td>
-                                                    </tr>
-                                                @endif
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $opd['patient_id'] }}</td>
+                                                    <td>{{ $opd['reference_name'] }}</td>
+                                                    <td>{{ $opd['first_name'] . ' ' . $opd['last_name'] }}</td>
+                                                    <td>{{ $opd['case_no'] }}</td>
+                                                    <td>{{ ucwords($opd['case_type']) }}</td>
+                                                    <td>{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
+                                                    <td>{{ date('H:i A', strtotime($opd->created_at)) }}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

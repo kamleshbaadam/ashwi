@@ -20,6 +20,7 @@ class DiagnosticsMedicineMaster extends Model
         }
         $diagnosisMedicine->diagnostics_id = $request->diagnostics_id;
         $diagnosisMedicine->medicine_id = $request->medicine_id;
+        $diagnosisMedicine->report_name = $request->report_name;
         $diagnosisMedicine->status = $request->status ?? 0;
         $diagnosisMedicine->save();
         return $diagnosisMedicine;

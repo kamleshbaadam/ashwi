@@ -21,6 +21,7 @@
                                         <th>SR</th>
                                         <th>Diagnosis Name</th>
                                         <th>Medicine Name</th>
+                                        <th>Report Name</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -32,6 +33,7 @@
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>{{ $diagnosticsMedicine->diagnostics_name }}</td>
                                             <td>{{ $diagnosticsMedicine->medicine_name }}</td>
+                                            <td>{{ $diagnosticsMedicine->report_name }}</td>
                                             <td>
                                                 @if ($diagnosticsMedicine->status == 1)
                                                     <span class="badge badge-success">Active</span>

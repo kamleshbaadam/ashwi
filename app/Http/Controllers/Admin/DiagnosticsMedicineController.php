@@ -66,16 +66,19 @@ class DiagnosticsMedicineController extends BaseController
                 [
                     'diagnostics_id' => 'required',
                     'medicine_id' => 'required',
+                    'report_name' => 'required',
                     'status' => 'nullable'
                 ],
                 [
                     'diagnostics_id.required' => 'Category Name Field is required !',
                     'medicine_id.required' => 'Description Field is required !',
+                    'report_name.required' => 'Report Name Field is required !',
                     'status.required' => 'Status Field is required !'
                 ]
             );
             // return $request->all();
             $request->medicine_id = implode(',', $request->medicine_id);
+            $request->report_name = implode(',', $request->report_name);
             DiagnosticsMedicineMaster::storDiagnosticsMedicine($request);
             return redirect('admin/diagnostics_medicine_list')->with('success', 'Diagnosis Medicine Added Successfully!');
 

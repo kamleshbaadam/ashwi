@@ -40,7 +40,8 @@
                                             </div>
                                             @php
                                                 $diagnosticsMedicineData['medicine_id'] = explode(',', $diagnosticsMedicineData['medicine_id'] ?? '');
-                                            @endphp
+                                                $diagnosticsMedicineData['report_name'] = explode(',', $diagnosticsMedicineData['report_name'] ?? '');
+                                            @endphp 
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="">Medicine Name</label>
@@ -53,7 +54,17 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="">Report Name</label>
+                                                    <select class="form-control select2" name="report_name[]" multiple>
+                                                        <option value="Biopsy" {{ in_array('Biopsy', $diagnosticsMedicineData['report_name'] ?? []) ? 'selected' : '' }}>Biopsy</option>
+                                                        <option value="CT Scan" {{ in_array('CT Scan', $diagnosticsMedicineData['report_name'] ?? []) ? 'selected' : '' }}>CT Scan</option>
+                                                        <option value="Audiogram" {{ in_array('Audiogram', $diagnosticsMedicineData['report_name'] ?? []) ? 'selected' : '' }}>Audiogram</option>
+                                                        <option value="MRI" {{ in_array('MRI', $diagnosticsMedicineData['report_name'] ?? []) ? 'selected' : '' }}>MRI</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 ">
                                             <div class="form-group">
