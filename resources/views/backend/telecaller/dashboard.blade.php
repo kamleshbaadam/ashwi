@@ -366,15 +366,19 @@
             $("#appointment").css('display', 'none');
             if ($(this).val() == "appointment") {
                 $("#appointment").css('display', 'block');
+                // Make fields required when appointment is selected
+                $('select[name="case_type"]').prop('required', true);
+                $('select[name="doctor_id"]').prop('required', true); 
+                $('input[name="appointment_date"]').prop('required', true);
+                $('input[name="time"]').prop('required', true);
+            } else {
+                // Remove required when appointment not selected
+                $('select[name="case_type"]').prop('required', false);
+                $('select[name="doctor_id"]').prop('required', false);
+                $('input[name="appointment_date"]').prop('required', false); 
+                $('input[name="time"]').prop('required', false);
             }
         });
-        $('input[name="type"]:radio').change(function() {
-            $("#appointment").css('display', 'none');
-            if ($(this).val() == "appointment") {
-                $("#appointment").css('display', 'block');
-            }
-        });
-
         $(document).ready(function() {
             $('input[name="phone_no"]').on('keyup', function() {
                 var query = $(this).val();
