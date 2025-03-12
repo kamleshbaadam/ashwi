@@ -73,7 +73,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Middle Name</label>
                                                         <input class="form-control" placeholder="Middle Name" name="middle_name" 
-                                                        required
+                                                        
                                                             value="{{ !empty($patientData['middle_name']) ? $patientData['middle_name'] : ''}}">
                                                     </div>
                                                 </div>
@@ -101,7 +101,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Date of
                                                             Birth</label><input class="form-control" type="date"
-                                                            name="dob" placeholder="Date of Birth" required
+                                                            name="dob" placeholder="Date of Birth" 
                                                             value="{{ !empty($patientData['dob']) ? $patientData['dob'] : $appointment['dob'] ?? '' }}">
                                                     </div>
                                                 </div>

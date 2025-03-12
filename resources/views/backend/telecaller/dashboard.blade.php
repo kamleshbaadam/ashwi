@@ -173,9 +173,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 text-right" style="margin-top: 5px;">
-                                    <div class="">
-                                        <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                                <div class="row">
+                                    <div class="col-sm-12 text-right" style="margin-top: 5px;">
+                                        <div class="">
+                                            <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
