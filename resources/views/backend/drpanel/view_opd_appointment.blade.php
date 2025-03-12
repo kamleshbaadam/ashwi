@@ -613,10 +613,6 @@
                 }
             });
         }
-
-
-
-
         // Function to check if a diagnosis is already added
         function isDiagnosisAlreadyAdded(diagnosisText) {
             var allDiagnosisCells = document.querySelectorAll('#diagnosisTableBody td:nth-child(2)');

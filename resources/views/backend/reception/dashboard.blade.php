@@ -40,7 +40,6 @@
                                             <th>Status</th>
                                             <th>Option</th>
                                             <th>Receipt </th>
-                                            <th>OPD</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,12 +78,7 @@
                                                     <a href=""><i class="os-icon os-icon-tasks-checked"></i></a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-sm" href=""><span>Print</span></a>
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-primary btn-sm" href="#"
-                                                        data-target="#onboardingWideSlideModal"
-                                                        data-toggle="modal"><span>View</span></a>
+                                                    <a class="btn btn-primary btn-sm" href="{{url('reception/create-bill/'.$opd->id)}}"><span>Create Bill</span></a>
                                                 </td>
                                             </tr>
                                         @endforeach
