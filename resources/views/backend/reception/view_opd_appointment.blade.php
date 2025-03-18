@@ -68,7 +68,6 @@
                                     <th>Status</th>
                                     <th>Option</th>
                                     <th>Receipt </th>
-                                    <th>OPD</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,11 +85,18 @@
                                         <td>{{ date('H:i A', strtotime($opd->created_at)) }}</td>
                                         <td>
                                             @if ($opd->status == '0')
+                                                {{-- @if (!empty($opd->waiting_time) || $opd->waiting_time != '00:00:00')
+                                                    <span class="status-pill smaller yellow"></span>
+                                                    <span>Pending
+                                                    </span>
+                                                    <br>({{ date('H:i', strtotime($opd->waiting_time)) }})
+                                                @endif --}}
                                                 <span class="status-pill smaller red"></span>
                                                 <span>In Queue</span>
                                             @else
                                                 <span class="status-pill smaller green"></span>
                                                 <span>Complete</span>
+
                                             @endif
                                         </td>
                                         <td class="row-actions">
@@ -100,12 +106,7 @@
                                             <a href=""><i class="os-icon os-icon-tasks-checked"></i></a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href=""><span>Print</span></a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href="#"
-                                                data-target="#onboardingWideSlideModal"
-                                                data-toggle="modal"><span>View</span></a>
+                                            <a class="btn btn-primary btn-sm" href="{{url('reception/create-bill/'.$opd->id)}}"><span>Create Bill</span></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -24,5 +24,7 @@ Route::group(['prefix' => 'reception'], function () {
         Route::get('view_opd_appointment',[AppointmentController::class,'view_opd_appointment']);
 
         Route::get('create-bill/{id}', [OpdController::class,'createBill']);
+        Route::post('store_bill', [OpdController::class,'storeBill']);
+        Route::get('preview_bill/{id}', [OpdController::class,'previewBill']);
     });
 });

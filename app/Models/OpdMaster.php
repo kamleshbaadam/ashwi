@@ -58,7 +58,18 @@ class OpdMaster extends Model
         }
         return $query->take(10)->get();
     }
-
+    public static function getAllOpdAppoiment($user_id=0)
+    {
+        $query = OpdMaster::selectRaw('opd_master.*, p.patient_id, p.first_name, p.phone_no, p.middle_name, p.last_name, p.reference_name, 
+        d.first_name as d_first_name, d.last_name as d_last_name')
+        ->leftJoin('patient_master as p','p.id', '=', 'opd_master.patient_id')
+        ->leftJoin('staff_master as d','d.id','=','opd_master.doctor_id')
+        ->orderBy('opd_master.status','ASC');
+        if($user_id) {
+            $query->where('opd_master.doctor_id', $user_id);
+        }
+        return $query->take(10)->get();
+    }
     public static function getHistoryByOPDIdandPatientId($patient_id,$opd_id){
         return OpdMaster::selectRaw('opd_master.*,d.diag  as diagnosis_name')
         ->leftJoin(DB::raw('(SELECT opd_id, GROUP_CONCAT(diagnosis_name) as diag FROM `opd_diagnosis` GROUP BY opd_id) AS d'),'d.opd_id', '=', 'opd_master.id')

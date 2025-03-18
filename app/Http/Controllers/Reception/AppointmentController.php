@@ -15,7 +15,7 @@ class AppointmentController extends BaseController
 		try {
 			$doctorList = StaffMaster::getOnlyDoctor();
 			$this->doctorData = $doctorList;
-			$query = OpdMaster::getRecordPatientMasterOpdMaster();
+			$query = OpdMaster::getAllOpdAppoiment($request->user_id);
 			if ($request->has('start_date') && $request->has('end_date')) {
 				$query->whereBetween('appointment_date', [$request->start_date, $request->end_date]);
 			}
