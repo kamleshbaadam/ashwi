@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reception;
 use App\Models\{StaffMaster, OpdMaster, PatientMaster};
 
 use App\Http\Controllers\Controller;
+use App\Models\Billing;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 
@@ -216,8 +217,12 @@ class HomeController extends BaseController
 				$patient = PatientMaster::createPatient($request);
 				$patient_id = $patient->id;
 				$request->patient_id = $patient_id;
-				OpdMaster::createAppointment($request);
-
+				$opd=OpdMaster::createAppointment($request);
+				Billing::create([
+					'patient_master_id' => $patient_id,
+					'opd_master_id' => $opd->id,
+					'appointments_id' => $id,
+					]);
 				// return $id;
 				if (!empty($id)) {
 					$status = 'finalized';

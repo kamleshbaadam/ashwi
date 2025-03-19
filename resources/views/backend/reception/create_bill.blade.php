@@ -35,12 +35,12 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group"><label for="">Taxation</label>
                                                     <select class="form-control" name="taxation">
-                                                        <option>Non-Gst</option>
-                                                        <option>Ears</option>
-                                                        <option>Nose </option>
-                                                        <option>Throat</option>
-                                                        <option>Biopsy</option>
-                                                        <option>Covid</option>
+                                                        <option value="non-gst" {{ $billing->taxation == 'non-gst' ? 'selected' : '' }}>Non-Gst</option>
+                                                        <option value="ears" {{ $billing->taxation == 'ears' ? 'selected' : '' }}>Ears</option>
+                                                        <option value="nose" {{ $billing->taxation == 'nose' ? 'selected' : '' }}>Nose </option>
+                                                        <option value="throat" {{ $billing->taxation == 'throat' ? 'selected' : '' }}>Throat</option>
+                                                        <option value="biopsy" {{ $billing->taxation == 'biopsy' ? 'selected' : '' }}>Biopsy</option>
+                                                        <option value="covid" {{ $billing->taxation == 'covid' ? 'selected' : '' }}>Covid</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -62,11 +62,8 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group"><label for="">Category</label>
                                                     <select class="form-control" name="category">
-                                                        <option>OPD</option>
-                                                        <option>Ears</option>
-                                                        <option>Nose </option>
-                                                        <option>Throat</option>
-                                                        <option>Biopsy</option>
+                                                        <option value="opd" {{ $billing->category == 'opd' ? 'selected' : '' }}>OPD</option>
+                                                        <option value="ears" {{ $billing->category == 'ears' ? 'selected' : '' }}>Ears</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -75,10 +72,9 @@
                                                 <div class="form-group">
                                                     <label for="">Package</label>
                                                     <select class="form-control" name="package">
-                                                        <option>Select package</option>
-                                                        <option>Ears</option>
-                                                        <option>Nose </option>
-                                                        <option>Throat</option>
+                                                        <option selected disabled>Select package</option>
+                                                        <option value="opd" {{ $billing->package == 'opd' ? 'selected' : '' }}>OPD</option>
+                                                        <option value="ears" {{ $billing->package == 'ears' ? 'selected' : '' }}>Ears</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -87,23 +83,20 @@
                                                 <div class="form-group">
                                                     <label for="">Account</label>
                                                     <select class="form-control" name="account">
-                                                        <option>Aashwi ENT Hospital</option>
-                                                        <option>Ears</option>
-                                                        <option>Nose </option>
-                                                        <option>Throat</option>
-                                                        <option>Biopsy</option>
-                                                        <option>Covid</option>
+                                                        <option selected disabled>Select Account</option>
+                                                        <option value="opd" {{ $billing->account == 'opd' ? 'selected' : '' }}>OPD</option>
+                                                        <option value="ears" {{ $billing->account == 'ears' ? 'selected' : '' }}>Ears</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group"><label for="">Case Memo Date</label>
-                                                    <input class="form-control" placeholder="Ref No" type="date" name="case_memo_date" value="{{date('Y-m-d')}}">
+                                                    <input class="form-control" placeholder="Ref No" type="date" name="case_memo_date" value="{{ $billing->case_memo_date ?? date('Y-m-d')}}">
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group"><label for="">Balance</label>
-                                                    <input class="form-control" placeholder="0.00" type="text" name="balance">
+                                                    <input class="form-control" placeholder="0.00" type="text" name="balance" value="{{ $billing->balance ?? 0 }}">
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
@@ -127,15 +120,15 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input class="form-control" placeholder="" type="date" name="date" value="{{date('Y-m-d')}}">
+                                                                <input class="form-control" placeholder="" type="date" name="date" value="{{ $billing->date ?? date('Y-m-d')}}">
                                                             </td>
                                                             <td>
                                                                 <select class="form-control" name="services">
                                                                     <option selected disabled>Select Service</option>
-                                                                    <option>Regular</option>
-                                                                    <option>Followup</option>
-                                                                    <option>80%</option>
-                                                                    <option>FOC</option>
+                                                                    <option value="regular" {{ $billing->services == 'regular' ? 'selected' : '' }}>Regular</option>
+                                                                    <option value="followup" {{ $billing->services == 'followup' ? 'selected' : '' }} >Followup</option>
+                                                                    <option value="80%" {{ $billing->services == '80%' ? 'selected' : '' }}>80%</option>
+                                                                    <option value="foc" {{ $billing->services == 'foc' ? 'selected' : '' }}>FOC</option>
                                                                 </select>
                                                             </td>
                                                             <td>
@@ -145,8 +138,8 @@
                                                             <td style="width: 200px;">
                                                                 <select class="form-control" name="incentive">
                                                                     <option>-Select-</option>
-                                                                    <option>No</option>
-                                                                    <option>Yes </option>
+                                                                    <option value="no" {{ $billing->incentive == 'no' ? 'selected' : '' }}>No</option>
+                                                                    <option value="yes" {{ $billing->incentive == 'yes' ? 'selected' : '' }}>Yes </option>
                                                                 </select>
                                                             </td>
                                                             <td style="width: 100px;">
@@ -172,34 +165,34 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group"><label for="">Mode Of Payment</label>
                                                     <select class="form-control" name="mode_of_payment">
-                                                        <option>cash</option>
-                                                        <option>Google Pay</option>
-                                                        <option>PayTM </option>
-                                                        <option>Credit card </option>
-                                                        <option>Bank transfer </option>
+                                                        <option value="cash" {{ $billing->mode_of_payment == 'cash' ? 'selected' : '' }}>cash</option>
+                                                        <option value="google_pay" {{ $billing->mode_of_payment == 'google_pay' ? 'selected' : '' }}>Google Pay</option>
+                                                        <option value="paytm" {{ $billing->mode_of_payment == 'paytm' ? 'selected' : '' }}>PayTM </option>
+                                                        <option value="credit_card" {{ $billing->mode_of_payment == 'credit_card' ? 'selected' : '' }}>Credit card </option>
+                                                        <option value="bank_transfer" {{ $billing->mode_of_payment == 'bank_transfer' ? 'selected' : '' }}>Bank transfer </option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group"><label for="">Ref No</label>
-                                                    <input class="form-control" placeholder="Ref No" type="text" name="ref_no">
+                                                    <input class="form-control" placeholder="Ref No" type="text" name="ref_no" value="{{ $billing->ref_no ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group"><label for="">Overall Discount</label>
                                                     <select class="form-control" name="overall_discount">
-                                                        <option>No</option>
-                                                        <option>Yes</option>
+                                                        <option value="no" {{ $billing->overall_discount == 'no' ? 'selected' : '' }}>No</option>
+                                                        <option value="yes" {{ $billing->overall_discount == 'yes' ? 'selected' : '' }}>Yes</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group"><label for="">Subtotal</label>
-                                                    <input class="form-control" placeholder="Subtotal" type="text" name="subtotal">
+                                                    <input class="form-control" placeholder="Subtotal" type="text" name="subtotal" value="{{ $billing->subtotal ?? 0 }}">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <textarea class="form-control" placeholder="description" type="text" name="description"></textarea>
+                                                <textarea class="form-control" placeholder="description" type="text" name="description"> {{ $billing->description ?? '' }}</textarea>
                                             </div>
                                             <div class="form-buttons-w col-sm-12 text-right">
                                                 <button class="btn btn-primary" type="submit"> Submit</button>
