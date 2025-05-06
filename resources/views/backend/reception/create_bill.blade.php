@@ -112,18 +112,17 @@
                                                             <th>Discount</th>
                                                             <th>Total</th>
                                                             <th><button class="mr-2 mb-2 btn btn-primary"
-                                                                    data-target="#onboardingSlideModal" data-toggle="modal"
-                                                                    type="button">Add
+                                                                    id="addServiceBtn" type="button">Add
                                                                     Services</button></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody id="servicesTableBody">
                                                         <tr>
                                                             <td>
-                                                                <input class="form-control" placeholder="" type="date" name="date" value="{{ $billing->date ?? date('Y-m-d')}}">
+                                                                <input class="form-control" placeholder="" type="date" name="date[]" value="{{ $billing->date ?? date('Y-m-d')}}">
                                                             </td>
                                                             <td>
-                                                                <select class="form-control" name="services">
+                                                                <select class="form-control" name="services[]">
                                                                     <option selected disabled>Select Service</option>
                                                                     <option value="regular" {{ $billing->services == 'regular' ? 'selected' : '' }}>Regular</option>
                                                                     <option value="followup" {{ $billing->services == 'followup' ? 'selected' : '' }} >Followup</option>
@@ -132,30 +131,30 @@
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <input class="form-control" placeholder="description" type="text" name="description">
+                                                                <input class="form-control" placeholder="description" type="text" name="description[]">
                                                             </td>
 
                                                             <td style="width: 200px;">
-                                                                <select class="form-control" name="incentive">
+                                                                <select class="form-control" name="incentive[]">
                                                                     <option>-Select-</option>
                                                                     <option value="no" {{ $billing->incentive == 'no' ? 'selected' : '' }}>No</option>
                                                                     <option value="yes" {{ $billing->incentive == 'yes' ? 'selected' : '' }}>Yes </option>
                                                                 </select>
                                                             </td>
                                                             <td style="width: 100px;">
-                                                                <input class="form-control" placeholder="1" type="text" name="qty">
+                                                                <input class="form-control qty" value="1" type="text" name="qty[]">
                                                             </td>
                                                             <td style="width: 100px;">
-                                                                <input class="form-control" placeholder="0" type="text" name="rate">
+                                                                <input class="form-control rate" value="0" type="text" name="rate[]">
                                                             </td>
                                                             <td style="width: 100px;">
-                                                                <input class="form-control" placeholder="0" type="text" name="discount">
+                                                                <input class="form-control discount" value="0" type="text" name="discount[]">
                                                             </td>
                                                             <td style="width: 150px;">
-                                                                <input class="form-control" placeholder="100" type="text" name="total">
+                                                                <input class="form-control total" value="0" type="text" name="total[]" readonly>
                                                             </td>
                                                             <td class="row-actions">
-                                                                <a class="danger" href="#"><i class="os-icon os-icon-ui-15"></i></a>
+                                                                <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -188,7 +187,7 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group"><label for="">Subtotal</label>
-                                                    <input class="form-control" placeholder="Subtotal" type="text" name="subtotal" value="{{ $billing->subtotal ?? 0 }}">
+                                                    <input class="form-control" placeholder="Subtotal" type="text" name="subtotal" id="subtotal" value="{{ $billing->subtotal ?? 0 }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -278,4 +277,79 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#addServiceBtn').click(function() {
+                let newRow = `<tr>
+                    <td>
+                        <input class="form-control" placeholder="" type="date" name="date[]" value="{{ date('Y-m-d') }}">
+                    </td>
+                    <td>
+                        <select class="form-control" name="services[]">
+                            <option selected disabled>Select Service</option>
+                            <option value="regular">Regular</option>
+                            <option value="followup">Followup</option>
+                            <option value="80%">80%</option>
+                            <option value="foc">FOC</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="form-control" placeholder="description" type="text" name="description[]">
+                    </td>
+                    <td style="width: 200px;">
+                        <select class="form-control" name="incentive[]">
+                            <option>-Select-</option>
+                            <option value="no">No</option>
+                            <option value="yes">Yes </option>
+                        </select>
+                    </td>
+                    <td style="width: 100px;">
+                        <input class="form-control qty" placeholder="1" type="text" name="qty[]">
+                    </td>
+                    <td style="width: 100px;">
+                        <input class="form-control rate" placeholder="0" type="text" name="rate[]">
+                    </td>
+                    <td style="width: 100px;">
+                        <input class="form-control discount" placeholder="0" type="text" name="discount[]">
+                    </td>
+                    <td style="width: 150px;">
+                        <input class="form-control total" placeholder="0" type="text" name="total[]" readonly>
+                    </td>
+                    <td class="row-actions">
+                        <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
+                    </td>
+                </tr>`;
+                $('#servicesTableBody').append(newRow);
+            });
+    
+            $(document).on('click', '.remove-service', function(e) {
+                e.preventDefault();
+                $(this).closest('tr').remove();
+                calculateSubtotal();
+            });
+    
+            $(document).on('input', '.qty, .rate, .discount', function() {
+                let row = $(this).closest('tr');
+                let qty = parseFloat(row.find('.qty').val()) || 0;
+                let rate = parseFloat(row.find('.rate').val()) || 0;
+                let discount = parseFloat(row.find('.discount').val()) || 0;
+                let total = (qty * rate) - discount;
+                console.log(`Qty: ${qty}, Rate: ${rate}, Discount: ${discount}, Total: ${total}`);  // Debugging log
+                row.find('.total').val(total.toFixed(2));
+                calculateSubtotal();
+            });
+
+            function calculateSubtotal() {
+                let subtotal = 0;
+                $('.total').each(function() {
+                    subtotal += parseFloat($(this).val()) || 0;
+                });
+                $('#subtotal').val(subtotal.toFixed(2));
+            }
+
+            calculateSubtotal(); // Initial calculation
+        });
+    </script>
 @endsection
