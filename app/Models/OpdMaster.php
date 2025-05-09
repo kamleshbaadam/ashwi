@@ -104,10 +104,13 @@ class OpdMaster extends Model
         $newArr->complain=$req->complain;
         $newArr->examination=$req->examination;
         $newArr->weight=$req->weight;
-        $newArr->height=$req->height;
+        $newArr->bp=$req->bp;
         $newArr->oxygen=$req->oxygen;
         $newArr->temperature=$req->temperature;
-
+        $newArr->hbp=$req->hbp;
+        $newArr->lbp=$req->lbp;
+        $newArr->diabetes=$req->diabetes;
+        
         $newArr->investigation=$req->investigation;
         $newArr->advise=$req->advise;
         $newArr->status=1;

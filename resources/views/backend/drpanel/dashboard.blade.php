@@ -85,6 +85,15 @@
                                     </thead>
                                     <tbody class="text-center">
                                         @foreach ($opdData as $opd)
+                                        @php
+                                            $arrival = strtotime($opd->created_at);
+                                            $now = time();
+                                            $diffInSeconds = $now - $arrival;
+
+                                            $minutes = floor($diffInSeconds / 60);
+                                            $hours = floor($minutes / 60);
+                                            $remainingMinutes = $minutes % 60;
+                                         @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $opd['patient_id'] }}</td>
@@ -93,7 +102,20 @@
                                                 <td>{{ $opd['case_no'] }}</td>
                                                 <td>{{ ucwords($opd['case_type']) }}</td>
                                                 <td>{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
-                                                <td>{{ date('H:i A', strtotime($opd->created_at)) }}</td>
+                                                <td>
+                                                    {{ date('h:i A', strtotime($opd->created_at)) }} <br>
+                                                    <small class="text-primary">
+                                                        Waiting from 
+                                                        @if ($minutes < 60)
+                                                            {{ $minutes }} minute{{ $minutes != 1 ? 's' : '' }}
+                                                        @else
+                                                            {{ $hours }} hour{{ $hours != 1 ? 's' : '' }}
+                                                            @if ($remainingMinutes > 0)
+                                                                {{ $remainingMinutes }} minute{{ $remainingMinutes != 1 ? 's' : '' }}
+                                                            @endif
+                                                        @endif
+                                                    </small>
+                                                </td>
                                                 <td>
                                                     @if ($opd->status == '0')
                                                         <span class="status-pill smaller red"></span>

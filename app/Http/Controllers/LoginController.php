@@ -63,7 +63,7 @@ class LoginController extends Controller
 
             Auth::logout();
 
-            return redirect()->back()->with('success', "Role Not Found Please Contact Support");
+            return redirect('/login')->back()->with('success', "Role Not Found Please Contact Support");
 		}
 		catch(\Exception $e)
 		{
@@ -77,7 +77,7 @@ class LoginController extends Controller
         {
             Auth::logout();
 
-            return redirect('/')->with('success', 'Logout SuccessFully');
+            return redirect('/login')->with('success', 'Logout SuccessFully');
         }
         catch(\Exception $e)
         {
@@ -91,7 +91,7 @@ class LoginController extends Controller
         {
             Auth::guard('staff')->logout();
 
-            return redirect('/')->with('success', 'Logout SuccessFully');
+            return redirect('/login')->with('success', 'Logout SuccessFully');
         }
         catch(\Exception $e)
         {

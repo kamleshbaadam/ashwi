@@ -19,15 +19,20 @@ class PatientMaster extends Model
 
     public static function createPatient($request)
     {
-        $patient_id = self::generatePatientId();
-        $patientArr = new PatientMaster();
-        $patientArr->patient_id = $patient_id;
+        // If we're editing, get the existing patient
         if (!empty($request->patient_id)) {
             $patientArr = PatientMaster::find($request->patient_id);
+
             if (!isset($patientArr->id)) {
-                return '';
+                return ''; // If patient not found, return empty
             }
+        } else {
+            // If we're inserting, generate a new patient ID
+            $patientArr = new PatientMaster();
+            $patientArr->patient_id = self::generatePatientId(); // Generate new ID for new patient
         }
+
+        // Fill the fields with the request data
         $patientArr->reference_name = $request->reference_name;
         $patientArr->name_prefix = $request->name_prefix;
         $patientArr->first_name = $request->first_name;
@@ -47,9 +52,13 @@ class PatientMaster extends Model
         $patientArr->state = $request->state;
         $patientArr->country = $request->country;
         $patientArr->mediclaim = $request->mediclaim;
+        
+        // Save the patient data (either new or updated)
         $patientArr->save();
+
         return $patientArr;
     }
+
 
     public static function getPatientByID($id)
     {

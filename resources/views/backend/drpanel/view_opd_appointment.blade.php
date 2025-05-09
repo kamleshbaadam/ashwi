@@ -103,6 +103,17 @@
                 width: 100%;
             }
         }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .big-checkbox {
+            width: 20px;
+            height: 20px;
+        }
     </style>
     <form action="{{ url('doctor/opdFormSave') }}" method="POST">
         @csrf
@@ -176,8 +187,8 @@
                                                 value="{{ $opdData['weight'] }}">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" name="height" placeholder="HT"
-                                                value="{{ $opdData['height'] }}">
+                                            <input type="text" class="form-control" name="bp" placeholder="BP"
+                                                value="{{ $opdData['bp'] }}">
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="oxygen" placeholder="O2"
@@ -186,6 +197,30 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="temperature" placeholder="TM"
                                                 value="{{ $opdData['temperature'] }}">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="checkbox-group">
+                                                <input type="checkbox" id="hbp" name="hbp" value="Yes" class="big-checkbox">
+                                                <label for="hbp">HBP</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="checkbox-group">
+                                                <input type="checkbox" id="lbp" name="lbp" value="Yes" class="big-checkbox">
+                                                <label for="lbp">LBP</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="checkbox-group">
+                                                <input type="checkbox" id="diabetes" name="diabetes" value="Yes" class="big-checkbox">
+                                                <label for="diabetes">Diabetes</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" name="other" placeholder="Other">
                                         </div>
                                     </div>
                                 </td>
