@@ -38,10 +38,9 @@
                                                         <label for="">Patient ID</label>
                                                         <input class="form-control"
                                                             name="patient_id"
-                                                            type="text"
-                                                            placeholder="Enter Patient ID"
                                                             value="{{ old('patient_id', $patientData['patient_id'] ?? '') }}"
-                                                            readonly>
+                                                            placeholder="Enter Patient ID" type="text"
+                                                            @if (!empty($patientData)) readonly @endif>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">

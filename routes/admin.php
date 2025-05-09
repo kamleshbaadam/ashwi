@@ -11,21 +11,21 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 
 	Route::controller(UserController::class)->group(function () {
-		Route::get('adminlogin', 'LoginForm')->name('admin.adminlogin');
-		Route::POST('login-store', 'login')->name('admin.login-store');
-		Route::get('logout', 'logout')->name('admin.logout');
+		Route::get('adminlogin', 'LoginForm');
+		Route::POST('login-store', 'login');
+		Route::get('logout', 'logout');
 	});
 
 	Route::middleware(['isAdmin'])->group(function () {
 		Route::controller(HomeController::class)->group(function () {
-			Route::get('dashboard', 'dashboard')->name('admin.dashboard');
+			Route::get('dashboard', 'dashboard');
 		});
 
 		Route::controller(StaffController::class)->group(function () {
-			Route::get('staffList', 'staffList')->name('admin.staffList');
+			Route::get('staffList', 'staffList');
 			Route::get('staffAdd', 'staffAdd');
 			Route::get('staffAdd/{id}', 'staffAdd');
-			Route::POST('addStaff', 'addStaff')->name('admin.addStaff');
+			Route::POST('addStaff', 'addStaff');
 		});
 		Route::controller(MedicineCategoryController::class)->group(function () {
 			Route::get('medicine_list', 'medicineList');

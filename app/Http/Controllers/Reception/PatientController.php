@@ -42,36 +42,38 @@ class PatientController extends BaseController
      */
     public function store(Request $request)
     {
-        try {
-            $validator = Validator::make($request->all(), [
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'phone_no' => 'required|string|max:15',
-                'gender' => 'required|in:male,female,other',
-                'age' => 'required|numeric',
-                'address' => 'nullable|string',
-                'email' => 'nullable|email',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            $patient = new PatientMaster();
-            $patient->first_name = $request->first_name;
-            $patient->last_name = $request->last_name;
-            $patient->phone_no = $request->phone_no;
-            $patient->gender = $request->gender;
-            $patient->age = $request->age;
-            $patient->address = $request->address;
-            $patient->email = $request->email;
-            $patient->save();
-
-            return redirect()->route('reception.patients')->with('success', 'Patient created successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage())->withInput();
+        // Auto-generate patient_id if not provided
+        if (empty($request->patient_id)) {
+            $latestPatient = Patient::orderBy('id', 'desc')->first();
+            $nextNumber = $latestPatient ? intval(substr($latestPatient->patient_id, 3)) + 1 : 1;
+            $generatedPatientId = 'AHR' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+            $request->merge(['patient_id' => $generatedPatientId]);
         }
+
+        $patient = new Patient();
+        $patient->patient_id = $request->patient_id;
+        $patient->prefix = $request->prefix;
+        $patient->first_name = $request->first_name;
+        $patient->middle_name = $request->middle_name;
+        $patient->last_name = $request->last_name;
+        $patient->gender = $request->gender;
+        $patient->dob = $request->dob;
+        $patient->age = $request->age;
+        $patient->blood_group = $request->blood_group;
+        $patient->contact_number = $request->contact_number;
+        $patient->email = $request->email;
+        $patient->address = $request->address;
+        $patient->pin_code = $request->pin_code;
+        $patient->area = $request->area;
+        $patient->city = $request->city;
+        $patient->district = $request->district;
+        $patient->state = $request->state;
+        $patient->country = $request->country;
+        $patient->save();
+
+        return redirect()->back()->with('success', 'Patient record created successfully.');
     }
+
 
     /**
      * Display the specified patient.

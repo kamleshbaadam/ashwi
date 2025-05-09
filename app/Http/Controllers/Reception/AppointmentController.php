@@ -98,7 +98,6 @@ class AppointmentController extends BaseController
         // Validate request data
         $validatedData = $request->validate([
             'patient_id' => 'required|integer|unique:patients,patient_id', // Ensure patient_id is unique
-			'appointment_id' => 'required|integer',
             'name' => 'required|string',
             'phone_no' => 'required|string',
             'reference' => 'required|string',
@@ -116,7 +115,6 @@ class AppointmentController extends BaseController
         $patient = PatientMaster::firstOrCreate(
             ['patient_id' => $request->patient_id], // Check for existing patient by patient_id
             [
-				'appointment_id' => 'required|integer',
                 'name' => $request->name,
                 'phone_no' => $request->phone_no,
                 'reference' => $request->reference,
@@ -132,7 +130,6 @@ class AppointmentController extends BaseController
         // Create appointment
         $appointment = Appointment::create([
             'patient_id' => $patient->id, // Use the patient's ID
-			'appointment_id' => 'required|integer',
             'name' => $request->name,
             'phone_no' => $request->phone_no,
             'reference' => $request->reference,
