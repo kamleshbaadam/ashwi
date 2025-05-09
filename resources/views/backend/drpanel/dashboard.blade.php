@@ -94,15 +94,20 @@
                                             $hours = floor($minutes / 60);
                                             $remainingMinutes = $minutes % 60;
                                          @endphp
+                                         {{-- <tr @if($patient->is_appointment)
+                                            style="background-color: #d4edda;"
+                                        @else
+                                            style="background-color: #f8d7da;"
+                                        @endif > --}}
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $opd['patient_id'] }}</td>
-                                                <td>{{ $opd['reference_name'] }}</td>
-                                                <td>{{ $opd['first_name'] . ' ' . $opd['last_name'] }}</td>
-                                                <td>{{ $opd['case_no'] }}</td>
-                                                <td>{{ ucwords($opd['case_type']) }}</td>
-                                                <td>{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
-                                                <td>
+                                                <td style="background-color: #d4edda;">{{ $loop->iteration }}</td>
+                                                <td style="background-color: #d4edda;">{{ $opd['patient_id'] }}</td>
+                                                <td style="background-color: #d4edda;">{{ $opd['reference_name'] }}</td>
+                                                <td style="background-color: #d4edda;">{{ $opd['first_name'] . ' ' . $opd['last_name'] }}</td>
+                                                <td style="background-color: #d4edda;">{{ $opd['case_no'] }}</td>
+                                                <td style="background-color: #d4edda;">{{ ucwords($opd['case_type']) }}</td>
+                                                <td style="background-color: #d4edda;">{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
+                                                <td style="background-color: #d4edda;">
                                                     {{ date('h:i A', strtotime($opd->created_at)) }} <br>
                                                     <small class="text-primary">
                                                         Waiting from 
@@ -116,7 +121,7 @@
                                                         @endif
                                                     </small>
                                                 </td>
-                                                <td>
+                                                <td style="background-color: #d4edda;">
                                                     @if ($opd->status == '0')
                                                         <span class="status-pill smaller red"></span>
                                                         <span>In Queue</span>
@@ -125,7 +130,7 @@
                                                         <span>Completed</span>
                                                     @endif
                                                 </td>
-                                                <td class="">
+                                                <td class="" style="background-color: #d4edda;">
                                                     <div class="">
                                                         <a class="btn btn-primary btn-primary"
                                                             href="{{ url('doctor/view-opdAppointment/' . $opd->id) }}"

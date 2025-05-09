@@ -93,32 +93,63 @@ class AppointmentController extends BaseController
 	 * Store a newly created appointment
 	 */
 	public function store(Request $request)
-	{
-		try {
-			// Validate request data
-			$validatedData = $request->validate([
-				'name' => 'required|string',
-				'phone_no' => 'required|string',
-				'reference' => 'required|string',
-				'type' => 'required|string',
-				'case_type' => 'nullable|string',
-				'doctor_id' => 'nullable|integer',
-				'appointment_date' => 'nullable|date',
-				'time' => 'nullable|string',
-				'morning_waiting_time' => 'nullable|string',
-				'evening_waiting_time' => 'nullable|string',
-				'patient_id' => 'nullable|integer',
-			]);
-			
-			// Create appointment
-			$appointment = Appointment::createAppointment($request);
-			
-			return redirect('reception/appointments')->with('success', 'Appointment created successfully!');
-		} catch (\Exception $e) {
-			return redirect()->back()->with('error', $e->getMessage());
-		}
-	}
-	
+{
+    try {
+        // Validate request data
+        $validatedData = $request->validate([
+            'patient_id' => 'required|integer|unique:patients,patient_id', // Ensure patient_id is unique
+			'appointment_id' => 'required|integer',
+            'name' => 'required|string',
+            'phone_no' => 'required|string',
+            'reference' => 'required|string',
+            'type' => 'required|string',
+            'case_type' => 'nullable|string',
+            'doctor_id' => 'nullable|integer',
+            'appointment_date' => 'nullable|date',
+            'time' => 'nullable|string',
+            'morning_waiting_time' => 'nullable|string',
+            'evening_waiting_time' => 'nullable|string',
+        ]);
+
+		        
+        // Create or find the patient
+        $patient = PatientMaster::firstOrCreate(
+            ['patient_id' => $request->patient_id], // Check for existing patient by patient_id
+            [
+				'appointment_id' => 'required|integer',
+                'name' => $request->name,
+                'phone_no' => $request->phone_no,
+                'reference' => $request->reference,
+				'type' => $request->type,
+				'case_type' => $request->case_type,
+				'doctor_id' => $request->doctor_id,
+				'appointment_date' => $request->appointment_date,
+				'time' => $request->time,
+				'morning_waiting_time' => $request->morning_waiting_time,
+				'evening_waiting_time' => $request->evening_waiting_time,
+            ]
+        );
+        // Create appointment
+        $appointment = Appointment::create([
+            'patient_id' => $patient->id, // Use the patient's ID
+			'appointment_id' => 'required|integer',
+            'name' => $request->name,
+            'phone_no' => $request->phone_no,
+            'reference' => $request->reference,
+            'type' => $request->type,
+            'case_type' => $request->case_type,
+            'doctor_id' => $request->doctor_id,
+            'appointment_date' => $request->appointment_date,
+            'time' => $request->time,
+            'morning_waiting_time' => $request->morning_waiting_time,
+            'evening_waiting_time' => $request->evening_waiting_time,
+        ]);
+        
+        return redirect('reception/appointments')->with('success', 'Appointment created successfully!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', $e->getMessage());
+    }
+}	
 	/**
 	 * Display the specified appointment
 	 */

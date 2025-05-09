@@ -40,8 +40,8 @@
                                                             name="patient_id"
                                                             type="text"
                                                             placeholder="Enter Patient ID"
-                                                            value="{{ !empty($patientData['patient_id']) ? $patientData['patient_id'] : '' }}"
-                                                            @if (!empty($patientData['patient_id'])) readonly @endif>
+                                                            value="{{ old('patient_id', $patientData['patient_id'] ?? '') }}"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -76,15 +76,15 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Middle Name</label><span class="text-danger">*</span>
                                                         <input class="form-control" placeholder="Middle Name" name="middle_name" 
-                                                        
-                                                            value="{{ !empty($patientData['middle_name']) ? $patientData['middle_name'] : ''}}">
+                                                        value= "{{ old('middle_name', $patientData['middle_name'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['middle_name']) ? $patientData['middle_name'] : ''}}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Last Name</label><span class="text-danger">*</span><input
                                                             class="form-control" placeholder="Last name" name="last_name"
-                                                            
-                                                            value="{{ !empty($patientData['last_name']) ? $patientData['last_name'] : '' }}">
+                                                             value= "{{ old('last_name', $patientData['last_name'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['last_name']) ? $patientData['last_name'] : '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -104,22 +104,22 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Date of
                                                             Birth</label><span class="text-danger">*</span><input class="form-control" type="date"
-                                                            name="dob" placeholder="Date of Birth" 
-                                                            value="{{ !empty($patientData['dob']) ? $patientData['dob'] : $appointment['dob'] ?? '' }}">
+                                                            name="dob" placeholder="Date of Birth" value= "{{ old('dob', $patientData['dob'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['dob']) ? $patientData['dob'] : $appointment['dob'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Age</label><span class="text-danger">*</span><input
                                                             name="age" type="number" class="form-control"
-                                                            placeholder="Age"
-                                                            value="{{ !empty($patientData['age']) ? $patientData['age'] : $appointment['age'] ?? '' }}">
+                                                            placeholder="Age"  value= "{{ old('age', $patientData['age'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['age']) ? $patientData['age'] : $appointment['age'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Blood Group</label><span class="text-danger">*</span><input
                                                             name="blood_group" class="form-control"
-                                                            placeholder="Blood Group" 
-                                                            value="{{ !empty($patientData['blood_group']) ? $patientData['blood_group'] : $appointment['blood_group'] ?? '' }}">
+                                                            placeholder="Blood Group"  value= "{{ old('blood_group', $patientData['blood_group'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['blood_group']) ? $patientData['blood_group'] : $appointment['blood_group'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -141,14 +141,15 @@
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <div class="form-group"><label for="">Email</label><span class="text-danger">*</span><input type="email"
-                                                            name="email" class="form-control" placeholder="Email" 
-                                                            value="{{ !empty($patientData['email']) ? $patientData['email'] : $appointment['email'] ?? ''}}">
+                                                            name="email" class="form-control" placeholder="Email"  value= "{{ old('email', $patientData['email'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['email']) ? $patientData['email'] : $appointment['email'] ?? ''}}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">First visit date</label>
                                                         <input class="form-control" type="date"
-                                                            placeholder="contant Number" value="{{ !empty($appointment['first_visit_date']) ? date('Y-m-d', strtotime($appointment['first_visit_date'])) : '' }}"> 
+                                                            placeholder="contant Number" 
+                                                            value="{{ !empty($appointment['first_visit_date']) ? date('Y-m-d', strtotime($appointment['first_visit_date'])) : '' }}"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -180,51 +181,51 @@
                                             <div class="row col-sm-6">
                                                 <div class="col-sm-12">
                                                     <div class="form-group"><label for="">Address</label><span class="text-danger">*</span><input
-                                                            class="form-control" name="address" placeholder="Address"  required
-                                                            value="{{ !empty($patientData['address']) ? $patientData['address'] : $appointment['address'] ?? '' }}"
-                                                            type="text">
+                                                            class="form-control" name="address" placeholder="Address"  required  value= "{{ old('address', $patientData['address'] ?? '')}}" type="text">
+                                                            {{-- value="{{ !empty($patientData['address']) ? $patientData['address'] : $appointment['address'] ?? '' }}" --}}
+                                                            
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">Pin Code</label><span class="text-danger">*</span><input
                                                             class="form-control" name="pincode" placeholder="pincode" 
-                                                            type="text"
-                                                            value="{{ !empty($patientData['pincode']) ? $patientData['pincode'] : $appointment['pincode'] ?? '' }}">
+                                                            type="text"  value= "{{ old('pincode', $patientData['pincode'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['pincode']) ? $patientData['pincode'] : $appointment['pincode'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">Area</label><span class="text-danger">*</span><input
                                                             class="form-control" name="area" type="text"
-                                                            placeholder="Area"  
-                                                            value="{{ !empty($patientData['area']) ? $patientData['area'] : $appointment['area'] ?? '' }}">
+                                                            placeholder="Area"  value= "{{ old('area', $patientData['area'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['area']) ? $patientData['area'] : $appointment['area'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">City</label><span class="text-danger">*</span><input
                                                             class="form-control" name="city" type="text"
-                                                            placeholder="City" 
-                                                            value="{{ !empty($patientData['city']) ? $patientData['city'] : $appointment['city'] ?? '' }}">
+                                                            placeholder="City"  value= "{{ old('city', $patientData['city'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['city']) ? $patientData['city'] : $appointment['city'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">District</label><span class="text-danger">*</span><input
                                                             class="form-control" name="district" placeholder="District"
-                                                            type="text" 
-                                                            value="{{ !empty($patientData['district']) ? $patientData['district'] : $appointment['district'] ?? '' }}">
+                                                            type="text"  value= "{{ old('district', $patientData['district'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['district']) ? $patientData['district'] : $appointment['district'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">State</label><span class="text-danger">*</span><input
                                                             class="form-control" name="state" type="text"
-                                                            placeholder="state" 
-                                                            value="{{ !empty($patientData['state']) ? $patientData['state'] : $appointment['state'] ?? '' }}">
+                                                            placeholder="state"  value= "{{ old('state', $patientData['state'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['state']) ? $patientData['state'] : $appointment['state'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group"><label for="">Country</label><span class="text-danger">*</span><input
                                                             class="form-control" name="country" type="text"
-                                                            placeholder="Country" 
-                                                            value="{{ !empty($patientData['country']) ? $patientData['country'] : $appointment['country'] ?? '' }}">
+                                                            placeholder="Country"  value= "{{ old('country', $patientData['country'] ?? '')}}">
+                                                            {{-- value="{{ !empty($patientData['country']) ? $patientData['country'] : $appointment['country'] ?? '' }}"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -272,7 +273,7 @@
                                                 <div class="col-sm-8">
                                                     <div class="form-group"><label for="">Remark</label><input
                                                             class="form-control" placeholder="Appointment Remark" name="remarks"
-                                                            value="{{ $appointment['remark'] ?? '' }}">
+                                                            value= "{{ old('remark', $patientData['remark'] ?? '')}}">
                                                     </div>
                                                 </div>
                                             </div>
