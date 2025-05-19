@@ -159,5 +159,4 @@ class HomeController extends BaseController
     return view('your-view-name', compact('bookedTimes', 'selectedDate'));
 }
 
-
 }
