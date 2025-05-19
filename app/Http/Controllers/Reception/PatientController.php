@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 class PatientController extends BaseController
 {
     /**
+     * 
+     * 
      * Display a listing of the patients.
      */
     public function index()
