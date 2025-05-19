@@ -132,12 +132,21 @@
                                             </div>
                                         </div>
                                         <h6 class="col-sm-12">Morning</h6>
-                                        @foreach(['10:00', '10:10', '10:20', '10:30', '10:40', '10:50', '11:00', '11:10', '11:20', '11:30', '11:40', '11:50','12:00','12:10','12:20','12:30','12:40','12:50','13:00'] as $time)
-                                            <div class="col-md-1 mb-2">
-                                                <input type="radio" name="time" class="timeRadio" value="{{ $time }}">
-                                                <span>{{ $time }}</span>
-                                            </div>
-                                        @endforeach
+@php
+    $timeSlots = ['10:00', '10:10', '10:20', '10:30', '10:40', '10:50', '11:00', '11:10', '11:20', '11:30', '11:40', '11:50','12:00','12:10','12:20','12:30','12:40','12:50','13:00'];
+@endphp
+
+@foreach($timeSlots as $time)
+    <div class="col-md-1 mb-2">
+        <input type="radio" 
+               name="time" 
+               class="timeRadio" 
+               value="{{ $time }}"
+               {{ in_array($time, $bookedTimes ?? []) ? 'disabled' : '' }}>
+        <span>{{ $time }}</span>
+    </div>
+@endforeach
+
                                         <div class="col-sm-12"></div>
                                         <div class="col-md-1" style="margin-top: 5px;">
                                             <input type="checkbox" id="waitingMorningCheckbox" style="margin-top: 10px;">

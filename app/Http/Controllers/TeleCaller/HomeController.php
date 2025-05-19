@@ -148,4 +148,16 @@ class HomeController extends BaseController
 		return $newArr;
 	}
 
+	public function showTimeSlots(Request $request)
+{
+    $selectedDate = $request->input('date'); // format: Y-m-d
+
+    $bookedTimes = Appointment::where('date', $selectedDate)
+                    ->pluck('time')
+                    ->toArray(); // e.g., ['10:10', '10:30']
+
+    return view('your-view-name', compact('bookedTimes', 'selectedDate'));
+}
+
+
 }
