@@ -137,15 +137,21 @@
                                         @endphp
 
                                         @foreach($timeSlots as $time)
+                                            @php
+                                                $isBooked = in_array($time, $bookedTimes ?? []);
+                                            @endphp
                                             <div class="col-md-1 mb-2">
                                                 <input type="radio" 
                                                     name="time" 
                                                     class="timeRadio" 
                                                     value="{{ $time }}"
-                                                    {{ in_array($time, $bookedTimes ?? []) ? 'disabled' : '' }}>
+                                                    {{ $isBooked ? 'disabled' : '' }}
+                                                    {{ !$isBooked ? 'required' : '' }}
+                                                    {{ $isBooked ? 'data-booked="true"' : '' }}>
                                                 <span>{{ $time }}</span>
                                             </div>
                                         @endforeach
+
                                         <div class="col-sm-12"></div>
                                         <div class="col-md-1" style="margin-top: 5px;">
                                             <input type="checkbox" id="waitingMorningCheckbox" style="margin-top: 10px;">
@@ -167,21 +173,16 @@
                                         @endphp
 
                                         @foreach($timeSlots as $time)
+                                            @php $isBooked = in_array($time, $bookedTimes ?? []); @endphp
                                             <div class="col-md-1 mb-2">
                                                 <input type="radio" 
                                                     name="time" 
                                                     class="timeRadio" 
                                                     value="{{ $time }}"
-                                                    {{ in_array($time, $bookedTimes ?? []) ? 'disabled' : '' }}>
+                                                    {{ $isBooked ? 'disabled data-booked=true' : 'required' }}>
                                                 <span>{{ $time }}</span>
                                             </div>
                                         @endforeach
-                                        <!-- @foreach(['15:00','15:10','15:20','15:30','15:40','15:50','16:00','16:10','16:20','16:30','16:40','16:50','17:00','17:10','17:20','17:30','17:40','17:50','18:00','18:00','18:10','18:20','18:30','18:40','18:50','19:00'] as $time)
-                                            <div class="col-md-1 mb-2">
-                                                <input type="radio" name="time" class="timeRadio" value="{{ $time }}">
-                                                <span>{{ $time }}</span>
-                                            </div>
-                                        @endforeach -->
                                         <div class="col-sm-12"></div>
                                         <div class="col-md-1" style="margin-top: 5px;">
                                             <input type="checkbox" id="waitingEveningCheckbox" style="margin-top: 10px;">
@@ -571,4 +572,107 @@
             });
         });
     </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const morningCheckbox = document.getElementById('waitingMorningCheckbox');
+        const eveningCheckbox = document.getElementById('waitingEveningCheckbox');
+        const morningTimeInput = document.getElementById('waitingMorningTime');
+        const eveningTimeInput = document.getElementById('waitingEveningTime');
+        const timeRadios = document.querySelectorAll('.timeRadio');
+
+        // Set correct min/max for waiting time inputs
+        morningTimeInput.min = '13:00';
+        morningTimeInput.max = '15:00';
+        eveningTimeInput.min = '19:00';
+        eveningTimeInput.max = '21:00';
+
+        // Handle Morning Waiting Checkbox
+        morningCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                morningTimeInput.disabled = false;
+                eveningTimeInput.disabled = true;
+                eveningCheckbox.checked = false;
+
+                timeRadios.forEach(radio => {
+                    radio.checked = false;
+                    radio.disabled = true;
+                    radio.required = false;
+                });
+            } else {
+                morningTimeInput.disabled = true;
+
+                timeRadios.forEach(radio => {
+                    if (!radio.hasAttribute('data-booked')) {
+                        radio.disabled = false;
+                        radio.required = true;
+                    }
+                });
+            }
+        });
+
+        // Handle Evening Waiting Checkbox
+        eveningCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                eveningTimeInput.disabled = false;
+                morningTimeInput.disabled = true;
+                morningCheckbox.checked = false;
+
+                timeRadios.forEach(radio => {
+                    radio.checked = false;
+                    radio.disabled = true;
+                    radio.required = false;
+                });
+            } else {
+                eveningTimeInput.disabled = true;
+
+                timeRadios.forEach(radio => {
+                    if (!radio.hasAttribute('data-booked')) {
+                        radio.disabled = false;
+                        radio.required = true;
+                    }
+                });
+            }
+        });
+
+        // If a radio is selected, disable both waiting inputs
+        $(".timeRadio").click(function () {
+            if (this.checked) {
+                morningCheckbox.checked = false;
+                eveningCheckbox.checked = false;
+                morningTimeInput.disabled = true;
+                eveningTimeInput.disabled = true;
+            }
+        });
+
+        // Handle time slot disabling based on booked times via AJAX
+        $('#appointment_date').on('change', function () {
+            var selectedDate = $(this).val();
+
+            $.ajax({
+                url: "{{ url('/telecaller/check-time-availability') }}",
+                method: 'POST',
+                data: {
+                    appointment_date: selectedDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    var bookedTimes = response;
+                    $(".timeRadio").each(function () {
+                        var timeValue = $(this).val();
+                        $(this).prop('checked', false);
+                        if ($.inArray(timeValue, bookedTimes) !== -1) {
+                            $(this).prop('disabled', true).attr('data-booked', 'true');
+                        } else {
+                            $(this).prop('disabled', false).removeAttr('data-booked');
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
 @endpush

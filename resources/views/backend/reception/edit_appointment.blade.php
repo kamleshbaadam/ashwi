@@ -272,7 +272,7 @@
                                                 <div class="col-sm-8">
                                                     <div class="form-group"><label for="">Remark</label><input
                                                             class="form-control" placeholder="Appointment Remark" name="remarks"
-                                                            value= "{{ old('remark', $patientData['remark'] ?? '')}}">
+                                                            value="{{ !empty($patientData['remark']) ? $patientData['remark'] : $appointment['remark'] ?? '' }}">
                                                     </div>
                                                 </div>
                                             </div>
