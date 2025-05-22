@@ -16,18 +16,35 @@ class OpdController extends BaseController
 {
     public function createBill($id)
     {
-        $this->billing = Billing::with(['opdMaster','appointments','patient'])->where('opd_master_id', $id)->first();
-        $this->serviceData=Service::get();
-        return view('backend.reception.create_bill', $this->data);
+        $billing = Billing::where('opd_master_id', $id)->first();
+
+        $serviceData = Service::get();
+
+        // Decode JSON fields into arrays or empty arrays if null
+        if ($billing) {
+            $billing->date = json_decode($billing->date) ?? [];
+            $billing->services = json_decode($billing->services) ?? [];
+            $billing->description = json_decode($billing->description) ?? [];
+            $billing->qty = json_decode($billing->qty) ?? [];
+            $billing->rate = json_decode($billing->rate) ?? [];
+            $billing->discount = json_decode($billing->discount) ?? [];
+            $billing->total = json_decode($billing->total) ?? [];
+        }
+
+        return view('backend.reception.create_bill', compact('billing', 'serviceData'));
     }
+
     public function storeBill(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
-            'description' => 'required',
+            'date' => 'required',
             'services' => 'required',
-            'rate' => 'required',
+            'description' => 'required',
             'qty' => 'required',
+            'rate' => 'required',
             'discount' => 'required',
+            'total' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -44,7 +61,8 @@ class OpdController extends BaseController
             $bill->appointments_id = $request->appointments_id;
             $bill->patient_master_id = $request->patient_master_id;
         }
-
+        $bill->date = $request->date;
+        $bill->total = $request->total;
         $bill->description = $request->description;
         $bill->services = $request->services;
         $bill->rate = $request->rate;
@@ -63,7 +81,7 @@ class OpdController extends BaseController
     }
     public function previewBill($id)
     {
-        $this->billing = Billing::with(['opdMaster','appointments','patient'])->find($id);
+        $this->billing = Billing::with(['opdMaster', 'appointments', 'patient'])->find($id);
         return view('backend.reception.preview_bill', $this->data);
     }
-} 
+}

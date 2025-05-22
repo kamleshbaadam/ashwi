@@ -168,52 +168,82 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="servicesTableBody">
-                                                        <tr>
-                                                            <td>
-                                                                <input class="form-control" type="date" name="date[]"
-                                                                    value="{{ $billing->date ?? date('Y-m-d') }}">
-                                                            </td>
-                                                            <td>
-                                                                <select class="form-control service-select"
-                                                                    name="services[]">
-                                                                    <option selected disabled value="">Select Service
-                                                                    </option>
-                                                                    @foreach ($serviceData as $service)
-                                                                        <option value="{{ $service->name }}"
-                                                                            data-description="{{ $service->description }}"
-                                                                            data-rate="{{ $service->rate }}">
-                                                                            {{ $service->name }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input class="form-control" type="text" name="description[]"
-                                                                    placeholder="Description" readonly>
-                                                            </td>
+    @if (!empty($billing) && count($billing->services) > 0)
+        @foreach ($billing->services as $index => $serviceName)
+            <tr>
+                <td>
+                    <input class="form-control" type="date" name="date[]" value="{{ $billing->date[$index] ?? date('Y-m-d') }}">
+                </td>
+                <td>
+                    <select class="form-control service-select" name="services[]">
+                        <option selected disabled value="">Select Service</option>
+                        @foreach ($serviceData as $service)
+                            <option value="{{ $service->name }}"
+                                data-description="{{ $service->description }}"
+                                data-rate="{{ $service->rate }}"
+                                {{ $serviceName == $service->name ? 'selected' : '' }}>
+                                {{ $service->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+                <td>
+                    <input class="form-control" type="text" name="description[]" placeholder="Description" value="{{ $billing->description[$index] ?? '' }}" readonly>
+                </td>
+                <td style="width: 100px;">
+                    <input class="form-control qty" type="number" name="qty[]" value="{{ $billing->qty[$index] ?? 1 }}">
+                </td>
+                <td style="width: 100px;">
+                    <input class="form-control rate" type="number" name="rate[]" value="{{ $billing->rate[$index] ?? 0 }}" readonly>
+                </td>
+                <td style="width: 100px;">
+                    <input class="form-control discount" type="number" name="discount[]" value="{{ $billing->discount[$index] ?? 0 }}">
+                </td>
+                <td style="width: 150px;">
+                    <input class="form-control total" type="number" name="total[]" value="{{ $billing->total[$index] ?? 0 }}" readonly>
+                </td>
+                <td class="row-actions">
+                    <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
+                </td>
+            </tr>
+        @endforeach
+    @else
+        <tr>
+            <td>
+                <input class="form-control" type="date" name="date[]" value="{{ date('Y-m-d') }}">
+            </td>
+            <td>
+                <select class="form-control service-select" name="services[]">
+                    <option selected disabled value="">Select Service</option>
+                    @foreach ($serviceData as $service)
+                        <option value="{{ $service->name }}" data-description="{{ $service->description }}" data-rate="{{ $service->rate }}">
+                            {{ $service->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </td>
+            <td>
+                <input class="form-control" type="text" name="description[]" placeholder="Description" readonly>
+            </td>
+            <td style="width: 100px;">
+                <input class="form-control qty" type="number" name="qty[]" value="1">
+            </td>
+            <td style="width: 100px;">
+                <input class="form-control rate" type="number" name="rate[]" value="0" readonly>
+            </td>
+            <td style="width: 100px;">
+                <input class="form-control discount" type="number" name="discount[]" value="0">
+            </td>
+            <td style="width: 150px;">
+                <input class="form-control total" type="number" name="total[]" value="0" readonly>
+            </td>
+            <td class="row-actions">
+                <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
+            </td>
+        </tr>
+    @endif
+</tbody>
 
-                                                            <td style="width: 100px;">
-                                                                <input class="form-control qty" type="number" name="qty[]"
-                                                                    value="1">
-                                                            </td>
-                                                            <td style="width: 100px;">
-                                                                <input class="form-control rate" type="number" name="rate[]"
-                                                                    value="0" readonly>
-                                                            </td>
-                                                            <td style="width: 100px;">
-                                                                <input class="form-control discount" type="number"
-                                                                    name="discount[]" value="0">
-                                                            </td>
-                                                            <td style="width: 150px;">
-                                                                <input class="form-control total" type="number"
-                                                                    name="total[]" value="0" readonly>
-                                                            </td>
-                                                            <td class="row-actions">
-                                                                <a class="danger remove-service" href="#"><i
-                                                                        class="os-icon os-icon-ui-15"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
                                             </div>
                                             <hr>
@@ -245,12 +275,6 @@
                                                         value="{{ $billing->subtotal ?? 0 }}" readonly>
                                                 </div>
                                             </div>
-
-                                            <div class="col-sm-12">
-                                                <textarea class="form-control" placeholder="Description"
-                                                    name="bill_description">{{ $billing->description ?? '' }}</textarea>
-                                            </div>
-
                                             <div class="form-buttons-w col-sm-12 text-right">
                                                 <button class="btn btn-primary" type="submit"> Submit</button>
                                                 <a class="btn btn-primary"
