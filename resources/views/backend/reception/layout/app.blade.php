@@ -12,16 +12,25 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <link href="{{ asset('backend/reception/favicon.png') }}" rel="shortcut icon">
     <link href="{{ asset('backend/reception/apple-touch-icon.png') }}" rel="apple-touch-icon">
-    <link href="{{ asset('backend/reception/../fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.html') }}" rel="stylesheet">
+    <link href="{{ asset('backend/reception/../fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.html') }}"
+        rel="stylesheet">
     <link href="{{ asset('backend/reception/bower_components/select2/dist/css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/reception/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/reception/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}"
+        rel="stylesheet">
     <link href="{{ asset('backend/reception/bower_components/dropzone/dist/dropzone.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/reception/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/reception/bower_components/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/reception/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/reception/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ asset('backend/reception/bower_components/fullcalendar/dist/fullcalendar.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ asset('backend/reception/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css') }}"
+        rel="stylesheet">
     <link href="{{ asset('backend/reception/bower_components/slick-carousel/slick/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/reception/css/main5739.css?version=4.5.0') }}" rel="stylesheet">
     <link href="{{ asset('backend/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .tooltip1 {
             margin-top: 1rem;
@@ -64,23 +73,27 @@
     <section class="content">
         @yield('content')
     </section>
-    
+
     <script src="{{ asset('backend/reception/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/popper.js/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/moment/moment.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
-    <script src="{{ asset('backend/reception/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
+    <script
+        src="{{ asset('backend/reception/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/bootstrap-validator/dist/validator.min.js') }}"></script>
-    <script src="{{ asset('backend/reception/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script
+        src="{{ asset('backend/reception/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/dropzone/dist/dropzone.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/editable-table/mindmup-editabletable.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('backend/reception/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script
+        src="{{ asset('backend/reception/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('backend/reception/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script
+        src="{{ asset('backend/reception/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/tether/dist/js/tether.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/slick-carousel/slick/slick.min.js') }}"></script>
     <script src="{{ asset('backend/reception/bower_components/bootstrap/js/dist/util.js') }}"></script>
@@ -98,21 +111,21 @@
     <script src="{{ asset('backend/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; 
+            i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
-            }, 
-            i[r].l = 1 * new Date(); 
+            },
+                i[r].l = 1 * new Date();
             a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; 
-            a.async = 1; 
-            a.src = g; 
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '{{ asset('backend/reception/../www.google-analytics.com/analytics.js') }}', 'ga');
-    
+
         ga('create', 'UA-42863888-9', 'auto');
         ga('send', 'pageview');
-        
+
         function tooltip() {
             $(".tooltip1").tooltip({
                 container: 'body'
@@ -124,7 +137,7 @@
 
         tooltip();
     </script>
-    
+
 </body>
 <!-- Mirrored from light.pinsupreme.com/apps_bank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 08:54:44 GMT -->
 

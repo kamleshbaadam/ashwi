@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label for="">Case Type</label>
 
-                                        <select class="form-control" name="case_type">
+                                        <select class="form-control" name="case_type" required>
                                             <option disabled selected>Case Type</option>
                                             <option value="New"
                                                 {{ $appointment->case_type == 'new' ? 'selected' : '' }}>

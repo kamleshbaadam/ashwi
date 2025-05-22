@@ -5,6 +5,7 @@ use App\Models\{StaffMaster, OpdMaster, PatientMaster};
 
 use App\Http\Controllers\Controller;
 use App\Models\Billing;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 
@@ -75,11 +76,11 @@ class HomeController extends BaseController
 				$firstVisit = Appointment::where('patient_id', $appointment->patient_id)
 					->orderBy('appointment_date', 'asc')
 					->first();
-					
+
 				$lastVisit = Appointment::where('patient_id', $appointment->patient_id)
-					->orderBy('appointment_date', 'desc') 
+					->orderBy('appointment_date', 'desc')
 					->first();
-					
+
 				$appointment->first_visit_date = $firstVisit ? $firstVisit->appointment_date : null;
 				$appointment->last_visit_date = $lastVisit ? $lastVisit->appointment_date : null;
 			}
@@ -102,20 +103,20 @@ class HomeController extends BaseController
 			$appointment = OpdMaster::getOpdByID($id);
 			if (!empty($appointment->patient_id)) {
 				$patientData = PatientMaster::getPatientByID($appointment->patient_id);
-				
+
 				// Get first and last OPD dates for this patient
 				$firstOpd = OpdMaster::where('patient_id', $appointment->patient_id)
 					->orderBy('appointment_date', 'asc')
 					->first();
-					
+
 				$lastOpd = OpdMaster::where('patient_id', $appointment->patient_id)
 					->orderBy('appointment_date', 'desc')
 					->first();
-					
+
 				$appointment->first_visit_date = $firstOpd ? $firstOpd->appointment_date : null;
 				$appointment->last_visit_date = $lastOpd ? $lastOpd->appointment_date : null;
 			}
-			
+
 			$this->patientData = $patientData;
 			$this->doctorData = $doctorList;
 			$this->appointment = $appointment;
@@ -136,7 +137,7 @@ class HomeController extends BaseController
 	}
 	public function addAppointment(Request $request)
 	{
-
+		// return $request->all();
 		if ($request->isMethod('post')) {
 			if (empty($request->patient_id)) {
 				$validatedData = $request->validate(
@@ -168,34 +169,6 @@ class HomeController extends BaseController
 						'remarks' => 'nullable|string',
 						'mediclaim' => 'required',
 					]
-					// ,
-					// [
-					// 	'reference_name.required' => 'Reference Required',
-					// 	'name_prefix.required' => 'Name Prefix Required',
-					// 	'first_name.required' => 'first_name Required',
-					// 	'middle_name.required' => 'middle_name Required',
-					// 	'last_name.required' => 'last_name Required',
-					// 	'gender.required' => 'gender Required',
-					// 	'dob.required' => 'dob Required',
-					// 	'age.required' => 'age Required',
-					// 	'blood_group.required' => 'blood_group Required',
-					// 	'phone_no.required' => 'phone_no Required',
-					// 	'email.required' => 'email Required',
-					// 	'address.required' => 'address Required',
-					// 	'pincode.required' => 'pincode Required',
-					// 	'area.required' => 'area Required',
-					// 	'city.required' => 'city Required',
-					// 	'district.required' => 'district Required',
-					// 	'state.required' => 'state Required',
-					// 	'country.required' => 'country Required',
-					// 	'other_address.required' => 'other_address Required',
-					// 	'case_type.required' => 'case_type Required',
-					// 	'payment_method.required' => 'payment_method Required',
-					// 	'appointment_date.required' => 'appointment_date Required',
-					// 	'appointment_time.required' => 'appointment_time Required',
-					// 	'doctor_id.required' => 'doctor_id Required',
-					// 	'remarks.required' => 'remarks Required',
-					// ]
 				);
 			} else {
 				$validatedData = $request->validate([
@@ -210,19 +183,18 @@ class HomeController extends BaseController
 				]);
 			}
 			try {
-
 				$id = $request->appointment_id;
 				$opd_id = $request->opd_id;
 				$patient_id = $request->patient_id;
 				$patient = PatientMaster::createPatient($request);
 				$patient_id = $patient->id;
 				$request->patient_id = $patient_id;
-				$opd=OpdMaster::createAppointment($request);
+				$opd = OpdMaster::createAppointment($request);
 				Billing::create([
 					'patient_master_id' => $patient_id,
 					'opd_master_id' => $opd->id,
 					'appointments_id' => $id,
-					]);
+				]);
 				// return $id;
 				if (!empty($id)) {
 					$status = 'finalized';
@@ -250,4 +222,25 @@ class HomeController extends BaseController
 			return redirect()->back()->with('error', $e->getMessage());
 		}
 	}
+	public function storeService(Request $request)
+	{
+		try {
+			$validatedData = $request->validate([
+				'name' => 'required',
+				'description' => 'required',
+				'rate' => 'required',
+			]);
+
+			$service = new Service();
+			$service->name = $request->name;
+			$service->description = $request->description;
+			$service->rate = $request->rate;
+			$service->save();
+
+			return response()->json(['success' => true, 'message' => 'Service added successfully']);
+		} catch (\Exception $e) {
+			return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+		}
+	}
+
 }

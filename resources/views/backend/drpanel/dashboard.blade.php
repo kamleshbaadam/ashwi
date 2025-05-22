@@ -15,55 +15,56 @@
             <div class="content-i">
                 <div class="content-box">
                     <!-- <div class="element-wrapper compact ">
-                            <div class="row pt-2">
-                                <div class="col-6 col-sm-3 col-xxl-2"><a
-                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                        <div class="label">Total Patients</div>
-                                        <div class="value">484</div>
-                                        <div class="trending trending-up"><span>12%</span><i
-                                                class="os-icon os-icon-arrow-up6"></i></div>
-                                    </a></div>
-                                <div class="col-6 col-sm-3 col-xxl-2"><a
-                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                        <div class="label">OPD</div>
-                                        <div class="value text-danger">3,248</div>
-                                        <div class="trending trending-down"><span>12%</span><i
-                                                class="os-icon os-icon-arrow-down6"></i></div>
-                                    </a></div>
-                                <div class="col-6 col-sm-3 col-xxl-2"><a
-                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                        <div class="label">Total Staff</div>
-                                        <div class="value">73</div>
-                                        <div class="trending trending-up"><span>12%</span><i
-                                                class="os-icon os-icon-arrow-up6"></i></div>
-                                    </a></div>
-                                <div class="col-6 col-sm-3 col-xxl-2"><a
-                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                        <div class="label">Total Booking</div>
-                                        <div class="value">1,284</div>
-                                        <div class="trending trending-up"><span>12%</span><i
-                                                class="os-icon os-icon-arrow-up6"></i></div>
-                                    </a></div>
-                                <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
-                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                        <div class="label">Bed</div>
-                                        <div class="value">473</div>
-                                        <div class="trending trending-down"><span>5%</span><i
-                                                class="os-icon os-icon-arrow-down6"></i></div>
-                                    </a></div>
-                                <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
-                                        class="element-box el-tablo centered trend-in-corner smaller" href="#">
-                                        <div class="label">Total HRM</div>
-                                        <div class="value">248</div>
-                                        <div class="trending trending-down"><span>12%</span><i
-                                                class="os-icon os-icon-arrow-down6"></i></div>
-                                    </a></div>
-                            </div>
-                        </div> -->
+                                <div class="row pt-2">
+                                    <div class="col-6 col-sm-3 col-xxl-2"><a
+                                            class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                            <div class="label">Total Patients</div>
+                                            <div class="value">484</div>
+                                            <div class="trending trending-up"><span>12%</span><i
+                                                    class="os-icon os-icon-arrow-up6"></i></div>
+                                        </a></div>
+                                    <div class="col-6 col-sm-3 col-xxl-2"><a
+                                            class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                            <div class="label">OPD</div>
+                                            <div class="value text-danger">3,248</div>
+                                            <div class="trending trending-down"><span>12%</span><i
+                                                    class="os-icon os-icon-arrow-down6"></i></div>
+                                        </a></div>
+                                    <div class="col-6 col-sm-3 col-xxl-2"><a
+                                            class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                            <div class="label">Total Staff</div>
+                                            <div class="value">73</div>
+                                            <div class="trending trending-up"><span>12%</span><i
+                                                    class="os-icon os-icon-arrow-up6"></i></div>
+                                        </a></div>
+                                    <div class="col-6 col-sm-3 col-xxl-2"><a
+                                            class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                            <div class="label">Total Booking</div>
+                                            <div class="value">1,284</div>
+                                            <div class="trending trending-up"><span>12%</span><i
+                                                    class="os-icon os-icon-arrow-up6"></i></div>
+                                        </a></div>
+                                    <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
+                                            class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                            <div class="label">Bed</div>
+                                            <div class="value">473</div>
+                                            <div class="trending trending-down"><span>5%</span><i
+                                                    class="os-icon os-icon-arrow-down6"></i></div>
+                                        </a></div>
+                                    <div class="col-6 col-xxl-2 d-sm-none d-xxl-block"><a
+                                            class="element-box el-tablo centered trend-in-corner smaller" href="#">
+                                            <div class="label">Total HRM</div>
+                                            <div class="value">248</div>
+                                            <div class="trending trending-down"><span>12%</span><i
+                                                    class="os-icon os-icon-arrow-down6"></i></div>
+                                        </a></div>
+                                </div>
+                            </div> -->
                     <div class="element-wrapper">
 
-                        <div class="element-actions"><a class="btn btn-success btn-sm" href="{{url('/doctor/currunt-opd')}}"><i
-                                    class="os-icon os-icon-grid-10"></i><span>View Appoinments </span></a>
+                        <div class="element-actions"><a class="btn btn-success btn-sm"
+                                href="{{url('/doctor/currunt-opd')}}"><i class="os-icon os-icon-grid-10"></i><span>View
+                                    Appoinments </span></a>
                         </div>
                         <h6 class="element-header">OPD Appointment</h6>
                         <div class="element-box-tp">
@@ -85,43 +86,43 @@
                                     </thead>
                                     <tbody class="text-center">
                                         @foreach ($opdData as $opd)
-                                        @php
-                                            $arrival = strtotime($opd->created_at);
-                                            $now = time();
-                                            $diffInSeconds = $now - $arrival;
+                                            @php
+                                                $arrival = strtotime($opd->created_at);
+                                                $now = time();
+                                                $diffInSeconds = $now - $arrival;
 
-                                            $minutes = floor($diffInSeconds / 60);
-                                            $hours = floor($minutes / 60);
-                                            $remainingMinutes = $minutes % 60;
-                                         @endphp
-                                         {{-- <tr @if($patient->is_appointment)
-                                            style="background-color: #d4edda;"
-                                        @else
-                                            style="background-color: #f8d7da;"
-                                        @endif > --}}
+                                                $minutes = floor($diffInSeconds / 60);
+                                                $hours = floor($minutes / 60);
+                                                $remainingMinutes = $minutes % 60;
+
+                                                $bgColor = is_null($opd->appointment_id) ? '#d4edda' : '#def3fd'; 
+                                            @endphp
                                             <tr>
-                                                <td style="background-color: #d4edda;">{{ $loop->iteration }}</td>
-                                                <td style="background-color: #d4edda;">{{ $opd['patient_id'] }}</td>
-                                                <td style="background-color: #d4edda;">{{ $opd['reference_name'] }}</td>
-                                                <td style="background-color: #d4edda;">{{ $opd['first_name'] . ' ' . $opd['last_name'] }}</td>
-                                                <td style="background-color: #d4edda;">{{ $opd['case_no'] }}</td>
-                                                <td style="background-color: #d4edda;">{{ ucwords($opd['case_type']) }}</td>
-                                                <td style="background-color: #d4edda;">{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
-                                                <td style="background-color: #d4edda;">
+                                                <td style="background-color: {{ $bgColor }};">{{ $loop->iteration }}</td>
+                                                <td style="background-color: {{ $bgColor }};">{{ $opd['patient_id'] }}</td>
+                                                <td style="background-color: {{ $bgColor }};">{{ $opd['reference_name'] }}</td>
+                                                <td style="background-color: {{ $bgColor }};">
+                                                    {{ $opd['first_name'] . ' ' . $opd['last_name'] }}</td>
+                                                <td style="background-color: {{ $bgColor }};">{{ $opd['case_no'] }}</td>
+                                                <td style="background-color: {{ $bgColor }};">{{ ucwords($opd['case_type']) }}
+                                                </td>
+                                                <td style="background-color: {{ $bgColor }};">
+                                                    {{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
+                                                <td style="background-color: {{ $bgColor }};">
                                                     {{ date('h:i A', strtotime($opd->created_at)) }} <br>
                                                     <small class="text-primary">
-                                                        Waiting from 
                                                         @if ($minutes < 60)
-                                                            {{ $minutes }} minute{{ $minutes != 1 ? 's' : '' }}
+                                                            {{ $minutes }} minute{{ $minutes != 1 ? 's' : '' }} ago
                                                         @else
                                                             {{ $hours }} hour{{ $hours != 1 ? 's' : '' }}
                                                             @if ($remainingMinutes > 0)
                                                                 {{ $remainingMinutes }} minute{{ $remainingMinutes != 1 ? 's' : '' }}
+                                                                ago
                                                             @endif
                                                         @endif
                                                     </small>
                                                 </td>
-                                                <td style="background-color: #d4edda;">
+                                                <td style="background-color: {{ $bgColor }};">
                                                     @if ($opd->status == '0')
                                                         <span class="status-pill smaller red"></span>
                                                         <span>In Queue</span>
@@ -130,17 +131,19 @@
                                                         <span>Completed</span>
                                                     @endif
                                                 </td>
-                                                <td class="" style="background-color: #d4edda;">
+                                                <td style="background-color: {{ $bgColor }};">
                                                     <div class="">
-                                                        <a class="btn btn-primary btn-primary"
+                                                        <a class="btn btn-primary"
                                                             href="{{ url('doctor/view-opdAppointment/' . $opd->id) }}"
-                                                            style="color: white;"><span>
-                                                                <i class="os-icon os-icon-grid-10"></i></span></a>
+                                                            style="color: white;">
+                                                            <i class="os-icon os-icon-grid-10"></i>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

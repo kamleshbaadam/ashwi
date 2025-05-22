@@ -17,6 +17,7 @@ Route::group(['prefix' => 'reception'], function () {
             //dashboard add patient
             // Route::get('add_appointment', 'viewAddAppointmentForm');
             Route::get('patientList', 'viewPatientList');
+            Route::post('store_service', 'storeService');
             // store record
             Route::post('add_appointment', 'addAppointment')->name('add_appointment');
         });

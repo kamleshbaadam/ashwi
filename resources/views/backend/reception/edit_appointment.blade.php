@@ -145,12 +145,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <div class="form-group"><label for="">First visit date</label>
+                                                    <div class="form-group">
+                                                        <label for="">First visit date</label>
                                                         <input class="form-control" type="date"
-                                                            placeholder="contant Number" 
-                                                            value="{{ !empty($appointment['first_visit_date']) ? date('Y-m-d', strtotime($appointment['first_visit_date'])) : '' }}"> 
+                                                            placeholder="Contact Number"
+                                                            value="{{ !empty($appointment['first_visit_date']) ? date('Y-m-d', strtotime($appointment['first_visit_date'])) : date('Y-m-d') }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-sm-3">
                                                     <div class="form-group"><label for="">Appointment Date</label><span class="text-danger">*</span>
                                                         <input class="form-control" type="date" name="appointment_date" required
