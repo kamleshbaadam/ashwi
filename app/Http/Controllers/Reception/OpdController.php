@@ -22,7 +22,20 @@ class OpdController extends BaseController
     }
     public function storeBill(Request $request)
     {
-        return $request->all();
+        $validator = Validator::make($request->all(), [
+            'description' => 'required',
+            'services' => 'required',
+            'rate' => 'required',
+            'qty' => 'required',
+            'discount' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->id) {
             $bill = Billing::find($request->id);
         } else {
@@ -31,6 +44,12 @@ class OpdController extends BaseController
             $bill->appointments_id = $request->appointments_id;
             $bill->patient_master_id = $request->patient_master_id;
         }
+
+        $bill->description = $request->description;
+        $bill->services = $request->services;
+        $bill->rate = $request->rate;
+        $bill->qty = $request->qty;
+        $bill->discount = $request->discount;
         $bill->taxation = $request->taxation;
         $bill->package = $request->package;
         $bill->account = $request->account;
@@ -38,8 +57,8 @@ class OpdController extends BaseController
         $bill->mode_of_payment = $request->mode_of_payment;
         $bill->ref_no = $request->ref_no;
         $bill->subtotal = $request->subtotal;
-        $bill->description = $request->description;
         $bill->save();
+
         return redirect()->back()->with('success', 'Bill created successfully');
     }
     public function previewBill($id)

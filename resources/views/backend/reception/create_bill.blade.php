@@ -248,13 +248,13 @@
 
                                             <div class="col-sm-12">
                                                 <textarea class="form-control" placeholder="Description"
-                                                    name="description">{{ $billing->description ?? '' }}</textarea>
+                                                    name="bill_description">{{ $billing->description ?? '' }}</textarea>
                                             </div>
 
                                             <div class="form-buttons-w col-sm-12 text-right">
                                                 <button class="btn btn-primary" type="submit"> Submit</button>
                                                 <a class="btn btn-primary"
-                                                    href="{{ url('reception/preview_bill/' . $billing->id)}}"> Print</a>
+                                                    href="{{ url("reception/preview_bill/{$billing->id}") }}"> Print</a>
                                                 <a class="btn btn-primary" href="{{url('reception/view_opd_appointment')}}"
                                                     style="background-color: white; color: black;">
                                                     Discard</a>
