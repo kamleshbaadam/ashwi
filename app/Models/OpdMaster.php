@@ -122,4 +122,17 @@ class OpdMaster extends Model
 
         return $newArr;
     }
+
+    public function patient()
+    {
+        return $this->belongsTo(PatientMaster::class, 'patient_id', 'id');
+    }
+
+    // In OpdMaster.php
+public function medicines()
+{
+    return $this->hasMany(OpdMedicine::class, 'opd_id', 'id');
+}
+
+
 }

@@ -97,7 +97,8 @@
                                                 <td class="row-actions">
                                                     <a href="{{ url('reception/edit-opd/' . $opd->id) }}">
                                                         <i class="os-icon os-icon-ui-49"></i></a>
-                                                    <a href=""><i class="os-icon os-icon-ui-44"></i></a>
+                                                    <a href="{{ url('reception/view-opd/' . $opd->id) }}">
+                                                        <i class="os-icon os-icon-ui-44"></i></a>
                                                     <a href=""><i class="os-icon os-icon-tasks-checked"></i></a>
                                                 </td>
                                                 <td>

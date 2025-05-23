@@ -14,6 +14,7 @@ Route::group(['prefix' => 'reception'], function () {
             Route::get('edit-appointment', 'editAppointment');
             Route::get('edit-appointment/{id}', 'editAppointment');
             Route::get('edit-opd/{id}', 'editOpd');
+            Route::get('view-opd/{id}', 'viewOpd');
             //dashboard add patient
             // Route::get('add_appointment', 'viewAddAppointmentForm');
             Route::get('patientList', 'viewPatientList');

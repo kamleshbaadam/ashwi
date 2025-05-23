@@ -129,6 +129,33 @@ class HomeController extends BaseController
 		}
 	}
 
+	public function viewOpd(Request $request, $id = null)
+	{
+		$patient = null;
+		$opd = null;
+		$medicines = [];
+
+		if ($id) {
+			// Try to get patient directly
+			$patient = PatientMaster::find($id);
+
+			if (!$patient) {
+				// If ID is OPD ID
+				$opd = OpdMaster::find($id);
+				if ($opd) {
+					$patient = PatientMaster::find($opd->patient_id);
+					$medicines = $opd->medicines; // get opd_medicine data
+				}
+			}
+		}
+
+		$this->data['patient'] = $patient;
+		$this->data['medicines'] = $medicines;
+
+		return view('backend.reception.view_opd', $this->data);
+	}
+
+
 	public function viewAddAppointmentForm(Request $request)
 	{
 		$doctorList = StaffMaster::getOnlyDoctor();
