@@ -44,26 +44,28 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($opdData as $opd)
-                                        @php
-                                            $arrival = strtotime($opd->created_at);
-                                            $now = time();
-                                            $diffInSeconds = $now - $arrival;
+                                            @php
+                                                $arrival = strtotime($opd->created_at);
+                                                $now = time();
+                                                $diffInSeconds = $now - $arrival;
 
-                                            $minutes = floor($diffInSeconds / 60);
-                                            $hours = floor($minutes / 60);
-                                            $remainingMinutes = $minutes % 60;
-                                         @endphp
+                                                $minutes = floor($diffInSeconds / 60);
+                                                $hours = floor($minutes / 60);
+                                                $remainingMinutes = $minutes % 60;
+
+                                                $tdStyle = is_null($opd->appointment_id) ? '' : 'style=background-color:#d4edda';
+                                            @endphp
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $opd->patient_id }}</td>
-                                                <td>{{ $opd->first_name . ' ' . $opd->last_name }}</td>
-                                                <td>{{ $opd->phone_no }}</td>
-                                                <td>{{ $opd->reference_name }}</td>
-                                                <td>{{ ucfirst($opd->case_no) }}</td>
-                                                <td>{{ ucfirst($opd->case_type) }}</td>
-                                                <td>{{ $opd->d_first_name . ' ' . $opd->d_last_name }}</td>
-                                                <td>{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
-                                                <td>
+                                                <td {{ $tdStyle }}>{{ $loop->iteration }}</td>
+                                                <td {{ $tdStyle }}>{{ $opd->patient_id }}</td>
+                                                <td {{ $tdStyle }}>{{ $opd->first_name . ' ' . $opd->last_name }}</td>
+                                                <td {{ $tdStyle }}>{{ $opd->phone_no }}</td>
+                                                <td {{ $tdStyle }}>{{ $opd->reference_name }}</td>
+                                                <td {{ $tdStyle }}>{{ ucfirst($opd->case_no) }}</td>
+                                                <td {{ $tdStyle }}>{{ ucfirst($opd->case_type) }}</td>
+                                                <td {{ $tdStyle }}>{{ $opd->d_first_name . ' ' . $opd->d_last_name }}</td>
+                                                <td {{ $tdStyle }}>{{ date('H:i A', strtotime($opd->appointment_time)) }}</td>
+                                                <td {{ $tdStyle }}>
                                                     {{ date('h:i A', strtotime($opd->created_at)) }} <br>
                                                     <small class="text-primary">
                                                         Waiting from <br>
@@ -76,35 +78,30 @@
                                                             @endif
                                                         @endif
                                                     </small>
-                                                    {{-- {{ date('H:i A', strtotime($opd->created_at)) }} --}}
                                                 </td>
-                                                <td>
+                                                <td {{ $tdStyle }}>
                                                     @if ($opd->status == '0')
-                                                        {{-- @if (!empty($opd->waiting_time) || $opd->waiting_time != '00:00:00')
-                                                            <span class="status-pill smaller yellow"></span>
-                                                            <span>Pending
-                                                            </span>
-                                                            <br>({{ date('H:i', strtotime($opd->waiting_time)) }})
-                                                        @endif --}}
                                                         <span class="status-pill smaller red"></span>
                                                         <span>In Queue</span>
                                                     @else
                                                         <span class="status-pill smaller green"></span>
                                                         <span>Complete</span>
-
                                                     @endif
                                                 </td>
-                                                <td class="row-actions">
+                                                <td class="row-actions" {{ $tdStyle }}>
                                                     <a href="{{ url('reception/edit-opd/' . $opd->id) }}">
                                                         <i class="os-icon os-icon-ui-49"></i></a>
                                                     <a href=""><i class="os-icon os-icon-ui-44"></i></a>
                                                     <a href=""><i class="os-icon os-icon-tasks-checked"></i></a>
                                                 </td>
-                                                <td>
-                                                    <a class="btn btn-primary btn-sm" href="{{url('reception/create-bill/'.$opd->id)}}"><span>Create Bill</span></a>
+                                                <td {{ $tdStyle }}>
+                                                    <a class="btn btn-primary btn-sm"
+                                                        href="{{ url('reception/create-bill/' . $opd->id) }}"><span>Create
+                                                            Bill</span></a>
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -177,19 +174,16 @@
                                         @endif
                                     </td>
                                     <td style="display: flex;font-size: 20px;">
-                                        <a href="{{ url('reception/edit-appointment/' . $appointment->id) }}"
-                                            type="button" name="submit"><i class="os-icon os-icon-ui-49"
+                                        <a href="{{ url('reception/edit-appointment/' . $appointment->id) }}" type="button"
+                                            name="submit"><i class="os-icon os-icon-ui-49"
                                                 style="color: black;"></i><span></span></a>
-                                        {{-- <form
-                                            action="
-                                        {{ url('telecaller/view-appointment/' . $appointment->id) }}
-                                         "
-                                            style="padding-left: 5px;" method="post"
+                                        {{-- <form action="
+                                                                {{ url('telecaller/view-appointment/' . $appointment->id) }}
+                                                                 " style="padding-left: 5px;" method="post"
                                             onsubmit="return confirm('Are you sure you want to delete this appointment?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" name="submit"
-                                                style="background-color: white;border:none">
+                                            <button type="submit" name="submit" style="background-color: white;border:none">
                                                 <i class="os-icon os-icon-ui-15"><span></span></i>
                                             </button>
                                         </form> --}}
@@ -205,8 +199,8 @@
         </div>
     </div>
     <script>
-            setInterval(function() {
-                window.location.reload();
-            }, 20000); // in ms
+        setInterval(function () {
+            window.location.reload();
+        }, 20000); // in ms
     </script>
 @endsection

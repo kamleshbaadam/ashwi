@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Reception;
+use App;
 use App\Models\{StaffMaster, OpdMaster, PatientMaster};
 
 use App\Http\Controllers\Controller;
@@ -184,6 +185,13 @@ class HomeController extends BaseController
 			}
 			try {
 				$id = $request->appointment_id;
+				if (empty($id)) {
+					$storedata = new Appointment();
+					$storedata->name = $request->first_name;
+					$storedata->phone_no = $request->phone_no;
+					$storedata->save(); 
+					$id = $storedata->id;
+				}
 				$opd_id = $request->opd_id;
 				$patient_id = $request->patient_id;
 				$patient = PatientMaster::createPatient($request);

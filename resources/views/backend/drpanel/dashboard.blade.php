@@ -95,7 +95,7 @@
                                                 $hours = floor($minutes / 60);
                                                 $remainingMinutes = $minutes % 60;
 
-                                                $bgColor = is_null($opd->appointment_id) ? '#d4edda' : '#def3fd'; 
+                                                $bgColor = is_null($opd->appointment_id) ? '' : '#d4edda'; 
                                             @endphp
                                             <tr>
                                                 <td style="background-color: {{ $bgColor }};">{{ $loop->iteration }}</td>
