@@ -3,286 +3,330 @@
 @push('title')
     <title>Print Bill</title>
 @endpush
+
 @section('content')
     <style>
-        td {
-            white-space: nowrap;
+        /* Reset & base */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f7fa;
+            color: #222;
+        }
+
+        .invoice-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            padding: 30px 35px;
+        }
+
+        /* Header */
+        .invoice-header {
+            border-bottom: 3px solid #1e88e5;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .invoice-header h1 {
+            font-weight: 700;
+            font-size: 34px;
+            color: #1e88e5;
+            margin-bottom: 8px;
+            letter-spacing: 1.1px;
+        }
+
+        .invoice-header p {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Patient and bill info */
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .info-block {
+            flex: 1 1 45%;
+            min-width: 250px;
+        }
+
+        .info-block p {
+            margin: 6px 0;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+
+        .info-block p strong {
+            width: 140px;
+            display: inline-block;
+            color: #444;
+        }
+
+        .info-block.text-right p {
+            text-align: right;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 15px;
+            box-shadow: 0 0 12px rgb(0 0 0 / 0.05);
+            border-radius: 6px;
             overflow: hidden;
-            text-overflow: ellipsis;
+        }
+
+        thead tr {
+            background-color: #1e88e5;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        th,
+        td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f5fb;
+        }
+
+        td.qty,
+        td.rate,
+        td.total {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Summary box */
+        .summary-box {
+            max-width: 350px;
+            margin-left: auto;
+            padding: 20px 25px;
+            border: 1px solid #d0dff7;
+            border-radius: 6px;
+            background: #f8fbff;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-weight: 600;
+            border-bottom: 1px solid #dbe5f7;
+            color: #333;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-size: 20px;
+            color: #1e88e5;
+            font-weight: 700;
+        }
+
+        .amount-in-words {
+            margin-top: 12px;
+            font-style: italic;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        /* Print button */
+        .print-btn {
+            background: #1e88e5;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        .print-btn:hover {
+            background-color: #155f9e;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .info-section {
+                flex-direction: column;
+            }
+
+            .info-block {
+                flex: 1 1 100%;
+                text-align: center;
+            }
+
+            .info-block.text-right p {
+                text-align: center;
+            }
+
+            .summary-box {
+                max-width: 100%;
+                margin-left: 0;
+            }
+
+            .print-btn {
+                float: none;
+                width: 100%;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: #000;
+            }
+
+            .invoice-wrapper {
+                box-shadow: none;
+                border: none;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            table thead tr {
+                background-color: #ddd !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            table tbody tr:hover {
+                background-color: transparent !important;
+            }
         }
     </style>
-    <div class="content-w" style="margin-top: -50px;">
-        <div class="content-i">
-            <div class="content-box">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="element-wrapper">
-                            <div class="">
-                                <form>
-                                    <div class="invoice-box" id="invoice-box">
-                                        <h6 class="element-header text-center">Aashwi E.N.T Hospital<br> 25 sumangalam Cooperative housing society,<br>
-                                            opp drive in cinema gate, Bodakdev-380054
-                                            <hr style="color: black;">
-                                         
-                                        </h6>
-                                        <div class="row col-sm-12">
-
-                                            <div class="col-sm-6">
-
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""> <b>Patient Name:</b> {{ $billing->patient->first_name ?? '' }} {{ $billing->patient->middle_name ?? '' }} {{ $billing->patient->last_name ?? '' }} </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""> <b>Patient Number:</b> {{ $billing->patient->phone_no ?? '' }}</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b>Department:</b> General Medicine</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b>Phone Number:</b> 971211111</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b>Mode oF payment:</b> {{$billing->mode_of_payment}}</label>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-sm-6" style="padding-left: 170px;">
-                                                <div class="col-sm-12">
-
-                                                    <div class="form-group"><label for=""><b>Bill id:</b> {{$billing->billing_no}}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b> Age / DOB:</b> 23</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b>Category</b>:{{$billing->category}}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b>Patient Id:</b> {{ $billing->patient->patient_id ?? '' }}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for=""><b>Bill Date:</b> {{$billing->created_at}}</label>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-
-
-
-                                        </div>
-                                        <table cellpadding="0" cellspacing="0">
-
-
-
-
-                                            <tbody><tr class="heading">
-                                                <td>
-                                                    DIGNOSIS
-                                                </td>
-                                                <td style="padding-right: 50px;">
-                                                    QTY
-                                                </td>
-                                                <td>RATE</td>
-                                                <td>TOTAL</td>
-                                            </tr>
-
-                                            <tr class="item">
-                                                <td>29/04/2024- First Confirmation
-                                                </td>
-
-                                                <td style="padding-right: 50px;">1
-
-                                                </td>
-                                                <td>0.00</td>
-                                                <td>100</td>
-                                            </tr>
-
-                                            <tr class="item">
-                                                <td>29/04/2024- First Confirmation
-                                                </td>
-
-                                                <td style="padding-right: 50px;">1
-
-                                                </td>
-                                                <td>0.00</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr class="item ">
-                                                <td>29/04/2024- First Confirmation
-                                                </td>
-
-                                                <td style="padding-right: 50px;">1
-
-                                                </td>
-                                                <td>0.00</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr class="item ">
-                                                <td></td>
-
-                                                <td>
-
-                                                </td>
-                                                <td>
-                                                    Subtotal : </td>
-                                                <td>100</td>
-                                            </tr>
-
-                                            <tr class=" heading">
-                                                <td>Eight Thousand Eight Hundred Only</td>
-
-                                                <td>
-
-                                                </td>
-                                                <td>
-
-                                                    Grand.Total : </td>
-                                                <td>100</td>
-                                            </tr>
-
-
-
-
-
-                                        </tbody></table>
-
-                                        <div class="col-lg-12 pt-4" style="display: flex;justify-content: end;">
-
-
-                                            <b>Created By:</b> Reception
-                                        </div>
-                                    </div>
-
-                                    <style>
-                                        .invoice-box {
-                                            max-width: 800px;
-                                            margin: auto;
-                                            padding: 30px;
-                                            border: 1px solid #eee;
-                                            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-                                            font-size: 16px;
-                                            line-height: 24px;
-                                            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-                                            color: #555;
-                                        }
-
-                                        .invoice-box table {
-                                            width: 100%;
-                                            line-height: inherit;
-                                            text-align: left;
-                                        }
-
-                                        .invoice-box table td {
-                                            padding: 5px;
-                                            vertical-align: top;
-                                        }
-
-                                        .invoice-box table tr td:nth-child(2) {
-                                            text-align: right;
-                                        }
-
-                                        .invoice-box table tr.top table td {
-                                            padding-bottom: 20px;
-                                        }
-
-                                        .invoice-box table tr.top table td.title {
-                                            font-size: 45px;
-                                            line-height: 45px;
-                                            color: #333;
-                                        }
-
-                                        .invoice-box table tr.information table td {
-                                            padding-bottom: 40px;
-                                        }
-
-                                        .invoice-box table tr.heading td {
-                                            background: #eee;
-                                            border-bottom: 1px solid #ddd;
-                                            font-weight: bold;
-                                        }
-
-                                        .invoice-box table tr.details td {
-                                            padding-bottom: 20px;
-                                        }
-
-                                        .invoice-box table tr.item td {
-                                            border-bottom: 1px solid #eee;
-                                        }
-
-                                        .invoice-box table tr.item.last td {
-                                            border-bottom: none;
-                                        }
-
-                                        .invoice-box table tr.total td:nth-child(2) {
-                                            border-top: 2px solid #eee;
-                                            font-weight: bold;
-                                        }
-
-                                        @media only screen and (max-width: 600px) {
-                                            .invoice-box table tr.top table td {
-                                                width: 100%;
-                                                display: block;
-                                                text-align: center;
-                                            }
-
-                                            .invoice-box table tr.information table td {
-                                                width: 100%;
-                                                display: block;
-                                                text-align: center;
-                                            }
-                                        }
-                                    </style>
-
-
-                                    <div class="col-lg-9" style="display: flex;justify-content: end;margin-top: 20px;">
-                                        <a class="btn btn-primary btn-w" href="#" onclick="printInvoice()"><span>Print</span></a>
-                                    </div>
-
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="display-type"></div>
+    <div class="invoice-wrapper" id="invoice-box">
+        <button class="print-btn" onclick="window.print()">Print Bill</button>
+        <header class="invoice-header">
+            <h1>Aashwi E.N.T Hospital</h1>
+            <p>25 Sumangalam Cooperative Housing Society, Opp Drive In Cinema Gate, Bodakdev-380054</p>
+        </header>
+        <section class="info-section">
+            <div class="info-block">
+                <p><strong>Patient Name:</strong> {{ $billing->patient->first_name ?? '' }}
+                    {{ $billing->patient->middle_name ?? '' }} {{ $billing->patient->last_name ?? '' }}
+                </p>
+                <p><strong>Patient Number:</strong> {{ $billing->patient->phone_no ?? '' }}</p>
+                <p><strong>Department:</strong> {{ $billing->category ?? '' }}</p>
+                <p><strong>Phone Number:</strong> {{ $billing->patient->phone_no ?? '' }}</p>
+                <p><strong>Mode of Payment:</strong>
+                    {{ ucfirst($billing->mode_of_payment) ?? ''}}</p>
             </div>
+            <div class="info-block text-right">
+                <p><strong>Bill ID:</strong> {{ $billing->billing_no }}</p>
+                <p><strong>Age / DOB:</strong> {{ $billing->patient->age ?? '' }}</p>
+                <p><strong>Category:</strong> {{ $billing->category }}</p>
+                <p><strong>Patient ID:</strong> {{ $billing->patient->patient_id ?? '' }}</p>
+                <p><strong>Bill Date:</strong> {{ $billing->created_at->format('d M, Y') }}</p>
+            </div>
+        </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Services</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @php
+                        $checkupType = $billing->opdMaster->checkup_type ?? '';
+
+                        $checkupLabels = [
+                            'f-up' => 'Follow Up',
+                            'regular' => 'Regular',
+                            'foc' => 'FOC',
+                            '80%' => '80%',
+                        ];
+
+                        $checkupAmounts = [
+                            'f-up' => 1000,
+                            'regular' => 2000,
+                            'foc' => 0,
+                            '80%' => 1600,
+                        ];
+
+                        $label = $checkupLabels[$checkupType] ?? $checkupType;
+                        $amount = $checkupAmounts[$checkupType] ?? 0;
+                    @endphp
+                    <td>{{ $label }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ $amount }}</td>
+                </tr>
+                @php
+                    $dates = json_decode($billing->date ?? '[]');
+                    $services = json_decode($billing->services ?? '[]');
+                    $qty = json_decode($billing->qty ?? '[]');
+                    $rate = json_decode($billing->rate ?? '[]');
+                    $discount = json_decode($billing->discount ?? '[]');
+                    $total = json_decode($billing->total ?? '[]');
+                @endphp
+
+                @foreach($services as $index => $service)
+                    <tr>
+                        <td>{{ ((date('d-m-Y', strtotime($dates[$index]))) ?? '-') . ' - ' . $service }}</td>
+                        <td>{{ $qty[$index] ?? '0' }}</td>
+                        <td>{{ number_format($rate[$index] ?? 0, 2) }}</td>
+                        <td>{{ number_format($discount[$index] ?? 0, 2) }}</td>
+                        <td>{{ number_format($total[$index] ?? 0, 2) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+
+        <div class="summary-box">
+            <div class="summary-row">
+                <span>Sub Total:</span>
+                <span>{{ number_format($billing->subtotal ?? 0, 2) }}</span>
+            </div>
+            <div class="summary-row">
+                <strong>Grand Total:</strong>
+                <strong>{{ number_format($billing->subtotal ?? 0, 2) }}</strong>
+            </div>
+            <div class="amount-in-words">Amount in words: Eight Thousand Eight Hundred Only</div>
         </div>
+
+        <div class="footer-text" style="text-align: right;">
+            <p><strong>Created By:</strong> Reception</p>
+        </div>
+
     </div>
-
-    <script>
-        function printInvoice() {
-            var printContents = document.getElementById('invoice-box').innerHTML;
-            var originalContents = document.body.innerHTML;
-
-            document.body.innerHTML = printContents;
-
-            window.print();
-
-            document.body.innerHTML = originalContents;
-            window.location.reload();
-        }
-    </script>
 @endsection

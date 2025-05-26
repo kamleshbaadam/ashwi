@@ -123,8 +123,8 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group"><label for="">Category</label>
                                                     <select class="form-control" name="category">
-                                                        <option value="opd" selected {{ $billing->category == 'opd' ? 'selected' : '' }}>OPD</option>
-                                                        <option value="ears" {{ $billing->category == 'ears' ? 'selected' : '' }}>Ears</option>
+                                                        <option value="OPD" selected {{ $billing->category == 'OPD' ? 'selected' : '' }}>OPD</option>
+                                                        <option value="IPD" {{ $billing->category == 'IPD' ? 'selected' : '' }}>IPD</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -134,8 +134,8 @@
                                                     <label for="">Package</label>
                                                     <select class="form-control" name="package">
                                                         <option selected disabled>Select package</option>
-                                                        <option value="opd" selected{{ $billing->package == 'opd' ? 'selected' : '' }}>OPD</option>
-                                                        <option value="ears" {{ $billing->package == 'ears' ? 'selected' : '' }}>Ears</option>
+                                                        <option value="OPD" selected{{ $billing->package == 'OPD' ? 'selected' : '' }}>OPD</option>
+                                                        <option value="IPD" {{ $billing->package == 'IPD' ? 'selected' : '' }}>IPD</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -145,8 +145,8 @@
                                                     <label for="">Account</label>
                                                     <select class="form-control" name="account">
                                                         <option selected disabled>Select Account</option>
-                                                        <option value="opd" selected {{ $billing->account == 'opd' ? 'selected' : '' }}>OPD</option>
-                                                        <option value="ears" {{ $billing->account == 'ears' ? 'selected' : '' }}>Ears</option>
+                                                        <option value="OPD" selected {{ $billing->account == 'OPD' ? 'selected' : '' }}>OPD</option>
+                                                        <option value="IPD" {{ $billing->account == 'IPD' ? 'selected' : '' }}>IPD</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -1,4 +1,3 @@
-
 <div class="all-wrapper with-side-panel solid-bg-all">
     <div class="search-with-suggestions-w">
         <div class="search-with-suggestions-modal">
@@ -78,15 +77,15 @@
         <div class="menu-mobile
          menu-activated-on-click color-scheme-dark">
             <div class="mm-logo-buttons-w"><a class="mm-logo" href="index-2.html"><img
-                        src="img/logo.png"><span>Clean Admin</span></a>
-                <div class="mm-buttons">
+                        ><span></span></a>
+                <!-- <div class="mm-buttons">
                     <div class="content-panel-open">
                         <div class="os-icon os-icon-grid-circles"></div>
                     </div>
                     <div class="mobile-menu-trigger">
                         <div class="os-icon os-icon-hamburger-menu-1"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="menu-and-user">
                 <div class="logged-user-w">

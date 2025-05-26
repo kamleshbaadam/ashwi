@@ -16,7 +16,7 @@ class OpdController extends BaseController
 {
     public function createBill($id)
     {
-      $billing = Billing::select('billings.*', 'opd_master.checkup_type')
+       $billing = Billing::select('billings.*', 'opd_master.checkup_type')
             ->join('opd_master', 'opd_master.id', '=', 'billings.opd_master_id')
             ->where('billings.opd_master_id', $id)
             ->first();
@@ -72,6 +72,7 @@ class OpdController extends BaseController
         $bill->rate = $request->rate;
         $bill->qty = $request->qty;
         $bill->discount = $request->discount;
+        $bill->category = $request->category;
         $bill->taxation = $request->taxation;
         $bill->package = $request->package;
         $bill->account = $request->account;
@@ -85,7 +86,9 @@ class OpdController extends BaseController
     }
     public function previewBill($id)
     {
+        
         $this->billing = Billing::with(['opdMaster', 'appointments', 'patient'])->find($id);
+        // dd($this->billing);
         return view('backend.reception.preview_bill', $this->data);
     }
-}
+};

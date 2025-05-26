@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- Mirrored from light.pinsupreme.com/apps_bank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 08:54:36 GMT -->
-
 <head>
     <meta charset="utf-8">
     @stack('title')
