@@ -10,6 +10,13 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        .disabled-link {
+            pointer-events: none;
+            opacity: 0.65;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
     </style>
     <div class="content-w" style="margin-top: -50px;">
         <div class="content-i">
@@ -73,7 +80,8 @@
                                                         @else
                                                             {{ $hours }} hour{{ $hours != 1 ? 's ago' : 'ago' }}
                                                             @if ($remainingMinutes > 0)
-                                                                {{ $remainingMinutes }} minute{{ $remainingMinutes != 1 ? 's ago' : 'ago' }}
+                                                                {{ $remainingMinutes }}
+                                                                minute{{ $remainingMinutes != 1 ? 's ago' : 'ago' }}
                                                             @endif
                                                         @endif
                                                     </small>
@@ -95,13 +103,20 @@
                                                     <a href=""><i class="os-icon os-icon-tasks-checked"></i></a>
                                                 </td>
                                                 <td {{ $tdStyle }}>
-                                                    <a class="btn btn-primary btn-sm"
-                                                        href="{{ url('reception/create-bill/' . $opd->id) }}"><span>Create
-                                                            Bill</span></a>
+                                                    @if($opd->status != '0')
+                                                        <a class="btn btn-primary btn-sm"
+                                                            href="{{ url('reception/create-bill/' . $opd->id) }}">
+                                                            <span>Create Bill</span>
+                                                        </a>
+                                                    @else
+                                                        <a class="btn btn-primary btn-sm disabled-link" aria-disabled="true"
+                                                            tabindex="-1">
+                                                            <span>Create Bill</span>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -178,8 +193,9 @@
                                             name="submit"><i class="os-icon os-icon-ui-49"
                                                 style="color: black;"></i><span></span></a>
                                         {{-- <form action="
-                                                                {{ url('telecaller/view-appointment/' . $appointment->id) }}
-                                                                 " style="padding-left: 5px;" method="post"
+                                                                                        {{ url('telecaller/view-appointment/' . $appointment->id) }}
+                                                                                         " style="padding-left: 5px;"
+                                            method="post"
                                             onsubmit="return confirm('Are you sure you want to delete this appointment?');">
                                             @csrf
                                             @method('DELETE')

@@ -229,6 +229,7 @@ class HomeController extends BaseController
 					'patient_master_id' => $patient_id,
 					'opd_master_id' => $opd->id,
 					'appointments_id' => $id,
+					'billing_no' => '#AHP' . date('dmYHis'),
 				]);
 				// return $id;
 				if (!empty($id)) {
