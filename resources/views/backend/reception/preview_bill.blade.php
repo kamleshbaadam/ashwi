@@ -321,7 +321,7 @@
                 <strong>Grand Total:</strong>
                 <strong>{{ number_format($billing->subtotal ?? 0, 2) }}</strong>
             </div>
-            <div class="amount-in-words">Amount in words: Eight Thousand Eight Hundred Only</div>
+            <!-- <div class="amount-in-words">Amount in words: Eight Thousand Eight Hundred Only</div> -->
         </div>
 
         <div class="footer-text" style="text-align: right;">
