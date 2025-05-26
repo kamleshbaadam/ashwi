@@ -1,11 +1,8 @@
 @extends('backend.reception.layout.app')
-
 @push('title')
     <title>Create Bill</title>
 @endpush
 @section('content')
-
-
     <style>
         td {
             white-space: nowrap;
@@ -66,8 +63,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             @include('flash-message')
                             <h6 class="element-header">Add OutPatient Case Memo </h6>
                             <div class="element-box">
@@ -168,82 +163,81 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="servicesTableBody">
-    @if (!empty($billing) && count($billing->services) > 0)
-        @foreach ($billing->services as $index => $serviceName)
-            <tr>
-                <td>
-                    <input class="form-control" type="date" name="date[]" value="{{ $billing->date[$index] ?? date('Y-m-d') }}">
-                </td>
-                <td>
-                    <select class="form-control service-select" name="services[]">
-                        <option selected disabled value="">Select Service</option>
-                        @foreach ($serviceData as $service)
-                            <option value="{{ $service->name }}"
-                                data-description="{{ $service->description }}"
-                                data-rate="{{ $service->rate }}"
-                                {{ $serviceName == $service->name ? 'selected' : '' }}>
-                                {{ $service->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </td>
-                <td>
-                    <input class="form-control" type="text" name="description[]" placeholder="Description" value="{{ $billing->description[$index] ?? '' }}" readonly>
-                </td>
-                <td style="width: 100px;">
-                    <input class="form-control qty" type="number" name="qty[]" value="{{ $billing->qty[$index] ?? 1 }}">
-                </td>
-                <td style="width: 100px;">
-                    <input class="form-control rate" type="number" name="rate[]" value="{{ $billing->rate[$index] ?? 0 }}" readonly>
-                </td>
-                <td style="width: 100px;">
-                    <input class="form-control discount" type="number" name="discount[]" value="{{ $billing->discount[$index] ?? 0 }}">
-                </td>
-                <td style="width: 150px;">
-                    <input class="form-control total" type="number" name="total[]" value="{{ $billing->total[$index] ?? 0 }}" readonly>
-                </td>
-                <td class="row-actions">
-                    <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
-                </td>
-            </tr>
-        @endforeach
-    @else
-        <tr>
-            <td>
-                <input class="form-control" type="date" name="date[]" value="{{ date('Y-m-d') }}">
-            </td>
-            <td>
-                <select class="form-control service-select" name="services[]">
-                    <option selected disabled value="">Select Service</option>
-                    @foreach ($serviceData as $service)
-                        <option value="{{ $service->name }}" data-description="{{ $service->description }}" data-rate="{{ $service->rate }}">
-                            {{ $service->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </td>
-            <td>
-                <input class="form-control" type="text" name="description[]" placeholder="Description" readonly>
-            </td>
-            <td style="width: 100px;">
-                <input class="form-control qty" type="number" name="qty[]" value="1">
-            </td>
-            <td style="width: 100px;">
-                <input class="form-control rate" type="number" name="rate[]" value="0" readonly>
-            </td>
-            <td style="width: 100px;">
-                <input class="form-control discount" type="number" name="discount[]" value="0">
-            </td>
-            <td style="width: 150px;">
-                <input class="form-control total" type="number" name="total[]" value="0" readonly>
-            </td>
-            <td class="row-actions">
-                <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
-            </td>
-        </tr>
-    @endif
-</tbody>
-
+                                                        @if (!empty($billing) && count($billing->services) > 0)
+                                                            @foreach ($billing->services as $index => $serviceName)
+                                                                <tr>
+                                                                    <td>
+                                                                        <input class="form-control" type="date" name="date[]" value="{{ $billing->date[$index] ?? date('Y-m-d') }}">
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control service-select" name="services[]">
+                                                                            <option selected disabled value="">Select Service</option>
+                                                                            @foreach ($serviceData as $service)
+                                                                                <option value="{{ $service->name }}"
+                                                                                    data-description="{{ $service->description }}"
+                                                                                    data-rate="{{ $service->rate }}"
+                                                                                    {{ $serviceName == $service->name ? 'selected' : '' }}>
+                                                                                    {{ $service->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="form-control" type="text" name="description[]" placeholder="Description" value="{{ $billing->description[$index] ?? '' }}" readonly>
+                                                                    </td>
+                                                                    <td style="width: 100px;">
+                                                                        <input class="form-control qty" type="number" name="qty[]" value="{{ $billing->qty[$index] ?? 1 }}">
+                                                                    </td>
+                                                                    <td style="width: 100px;">
+                                                                        <input class="form-control rate" type="number" name="rate[]" value="{{ $billing->rate[$index] ?? 0 }}" readonly>
+                                                                    </td>
+                                                                    <td style="width: 100px;">
+                                                                        <input class="form-control discount" type="number" name="discount[]" value="{{ $billing->discount[$index] ?? 0 }}">
+                                                                    </td>
+                                                                    <td style="width: 150px;">
+                                                                        <input class="form-control total" type="number" name="total[]" value="{{ $billing->total[$index] ?? 0 }}" readonly>
+                                                                    </td>
+                                                                    <td class="row-actions">
+                                                                        <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @else
+                                                            <tr>
+                                                                <td>
+                                                                    <input class="form-control" type="date" name="date[]" value="{{ date('Y-m-d') }}">
+                                                                </td>
+                                                                <td>
+                                                                    <select class="form-control service-select" name="services[]">
+                                                                        <option selected disabled value="">Select Service</option>
+                                                                        @foreach ($serviceData as $service)
+                                                                            <option value="{{ $service->name }}" data-description="{{ $service->description }}" data-rate="{{ $service->rate }}">
+                                                                                {{ $service->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input class="form-control" type="text" name="description[]" placeholder="Description" readonly>
+                                                                </td>
+                                                                <td style="width: 100px;">
+                                                                    <input class="form-control qty" type="number" name="qty[]" value="1">
+                                                                </td>
+                                                                <td style="width: 100px;">
+                                                                    <input class="form-control rate" type="number" name="rate[]" value="0" readonly>
+                                                                </td>
+                                                                <td style="width: 100px;">
+                                                                    <input class="form-control discount" type="number" name="discount[]" value="0">
+                                                                </td>
+                                                                <td style="width: 150px;">
+                                                                    <input class="form-control total" type="number" name="total[]" value="0" readonly>
+                                                                </td>
+                                                                <td class="row-actions">
+                                                                    <a class="danger remove-service" href="#"><i class="os-icon os-icon-ui-15"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    </tbody>
                                                 </table>
                                             </div>
                                             <hr>
@@ -267,7 +261,7 @@
                                                         name="ref_no" value="{{ $billing->ref_no ?? '' }}">
                                                 </div>
                                             </div>
-
+                                            <input type="hidden" id="checkup_type_value" value="{{ $billing->checkup_type ?? '' }}">
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label for="">Subtotal</label>
@@ -286,77 +280,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <!-- <div aria-hidden="true" class="onboarding-modal modal fade animated"
-                                                id="onboardingSlideModal" role="dialog" tabindex="-1">
-                                                <div class="modal-dialog modal-centered" role="document">
-                                                    <div class="modal-content text-center"><button aria-label="Close" class="close"
-                                                            data-dismiss="modal" type="button"><span
-                                                                class="os-icon os-icon-close"></span></button>
-                                                        <div class="onboarding-slider-w">
-                                                            <div class="onboarding-slide">
-
-                                                                <div class="onboarding-content with-gradient">
-                                                                    <h4 class="onboarding-title">
-                                                                    </h4>
-                                                                    <form>
-                                                                        <div class="row text-left">
-
-                                                                            <div class="col-sm-12">
-                                                                                <div class="form-group"><label for="">Group</label>
-                                                                                    <select class="form-control" name="group">
-                                                                                        <option>OPD</option>
-                                                                                        <option>IPD</option>
-                                                                                        <option>Other</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-12">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Services Name</label>
-                                                                                    <input class="form-control" name="services"
-                                                                                        placeholder="" value="">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-12">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Rate</label>
-                                                                                    <input class="form-control" name="rate"
-                                                                                        placeholder="" value="">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-sm-12">
-                                                                                <div class="form-group"><label
-                                                                                        for="">description</label>
-                                                                                    <textarea class="form-control"
-                                                                                        placeholder="description"
-                                                                                        name="description"></textarea>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-sm-6 text-right">
-                                                                                <div class="form-buttons-w"><button
-                                                                                        class="btn btn-primary" type="submit">
-                                                                                        Save</button>
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <div class="form-buttons-w"><button
-                                                                                        class="btn btn-primary" type="button"
-                                                                                        style="background-color: white;color: black;">
-                                                                                        cancel</button>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -365,9 +288,7 @@
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
         $(document).ready(function () {
             $('#serviceForm').on('submit', function (e) {
@@ -398,78 +319,98 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            const serviceData = @json($serviceData);
+<script>
+ $(document).ready(function () {
+    function calculateSubtotal() {
+        let serviceTotal = 0;
+        $('input[name="total[]"]').each(function () {
+            serviceTotal += parseFloat($(this).val()) || 0;
+        });
 
-            function calculateSubtotal() {
-                let subtotal = 0;
-                $('input[name="total[]"]').each(function () {
-                    subtotal += parseFloat($(this).val()) || 0;
-                });
-                $('#subtotal').val(subtotal.toFixed(2));
-            }
+        let extra = 0;
+        const checkupType = $('#checkup_type_value').val();
 
-            function bindEvents($row) {
-                $row.find('select[name="services[]"]').off('change').on('change', function () {
-                    const selected = $(this).find('option:selected');
-                    const desc = selected.data('description') || '';
-                    const rate = selected.data('rate') || 0;
+        switch (checkupType) {
+            case 'regular':
+                extra = 2000;
+                break;
+            case 'f-up':
+                extra = 1000;
+                break;
+            case '%80':
+                extra = 1600;
+                break;
+            case 'foc':
+                extra = 0;
+                break;
+        }
 
-                    $row.find('input[name="description[]"]').val(desc);
-                    $row.find('input[name="rate[]"]').val(rate);
-                    $row.find('.qty').trigger('input');
-                });
+        const subtotal = serviceTotal + extra;
+        $('#subtotal').val(subtotal.toFixed(2));
+    }
 
-                $row.find('.qty, .rate, .discount').off('input').on('input', function () {
-                    const row = $(this).closest('tr');
-                    const qty = parseFloat(row.find('.qty').val()) || 0;
-                    const rate = parseFloat(row.find('.rate').val()) || 0;
-                    const discount = parseFloat(row.find('.discount').val()) || 0;
-                    const total = (qty * rate) - discount;
-                    row.find('.total').val(total.toFixed(2));
-                    calculateSubtotal();
-                });
-            }
+    function bindEvents($row) {
+        $row.find('select[name="services[]"]').off('change').on('change', function () {
+            const selected = $(this).find('option:selected');
+            const desc = selected.data('description') || '';
+            const rate = selected.data('rate') || 0;
 
-            // Bind existing rows
-            $('#servicesTableBody tr').each(function () {
-                bindEvents($(this));
-            });
+            $row.find('input[name="description[]"]').val(desc);
+            $row.find('input[name="rate[]"]').val(rate);
+            $row.find('.qty').trigger('input');
+        });
 
-            $('#addServiceBtn').click(function () {
-                const $original = $('#servicesTableBody tr:first');
-                const $clone = $original.clone();
-
-                // Reset values
-                $clone.find('input').each(function () {
-                    const type = $(this).attr('type');
-                    if (type === 'number') $(this).val('0');
-                    if (type === 'date') $(this).val(new Date().toISOString().split('T')[0]);
-                    if ($(this).hasClass('qty')) $(this).val('1');
-                    if ($(this).hasClass('discount')) $(this).val('0');
-                    if ($(this).hasClass('total')) $(this).val('0');
-                    if ($(this).attr('name') === 'description[]') $(this).val('');
-                });
-
-                const selectHTML = $original.find('select[name="services[]"]').html();
-                $clone.find('select[name="services[]"]').html(selectHTML).val('');
-
-                bindEvents($clone);
-                $('#servicesTableBody').append($clone);
-            });
-
-            $(document).on('click', '.remove-service', function (e) {
-                e.preventDefault();
-                if ($('#servicesTableBody tr').length > 1) {
-                    $(this).closest('tr').remove();
-                    calculateSubtotal();
-                }
-            });
-
+        $row.find('.qty, .rate, .discount').off('input').on('input', function () {
+            const row = $(this).closest('tr');
+            const qty = parseFloat(row.find('.qty').val()) || 0;
+            const rate = parseFloat(row.find('.rate').val()) || 0;
+            const discount = parseFloat(row.find('.discount').val()) || 0;
+            const total = (qty * rate) - discount;
+            row.find('.total').val(total.toFixed(2));
             calculateSubtotal();
         });
-    </script>
+    }
 
+    $('#servicesTableBody tr').each(function () {
+        bindEvents($(this));
+    });
+
+    $('#addServiceBtn').click(function () {
+        const $original = $('#servicesTableBody tr:first');
+        const $clone = $original.clone();
+
+        $clone.find('input').each(function () {
+            const type = $(this).attr('type');
+            if (type === 'number') $(this).val('0');
+            if (type === 'date') $(this).val(new Date().toISOString().split('T')[0]);
+            if ($(this).hasClass('qty')) $(this).val('1');
+            if ($(this).hasClass('discount')) $(this).val('0');
+            if ($(this).hasClass('total')) $(this).val('0');
+            if ($(this).attr('name') === 'description[]') $(this).val('');
+        });
+
+        const selectHTML = $original.find('select[name="services[]"]').html();
+        $clone.find('select[name="services[]"]').html(selectHTML).val('');
+
+        bindEvents($clone);
+        $('#servicesTableBody').append($clone);
+    });
+
+    $(document).on('click', '.remove-service', function (e) {
+        e.preventDefault();
+        if ($('#servicesTableBody tr').length > 1) {
+            $(this).closest('tr').remove();
+            calculateSubtotal();
+        }
+    });
+
+    $('#checkup_type_value').on('change', function () {
+        calculateSubtotal();
+    });
+
+    calculateSubtotal();
+});
+
+</script>
 
 @endsection

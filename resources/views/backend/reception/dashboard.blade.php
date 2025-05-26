@@ -68,13 +68,12 @@
                                                 <td {{ $tdStyle }}>
                                                     {{ date('h:i A', strtotime($opd->created_at)) }} <br>
                                                     <small class="text-primary">
-                                                        Waiting from <br>
                                                         @if ($minutes < 60)
-                                                            {{ $minutes }} minute{{ $minutes != 1 ? 's' : '' }}
+                                                            {{ $minutes }} minute{{ $minutes != 1 ? 's ago' : 'ago' }}
                                                         @else
-                                                            {{ $hours }} hour{{ $hours != 1 ? 's' : '' }}
+                                                            {{ $hours }} hour{{ $hours != 1 ? 's ago' : 'ago' }}
                                                             @if ($remainingMinutes > 0)
-                                                                {{ $remainingMinutes }} minute{{ $remainingMinutes != 1 ? 's' : '' }}
+                                                                {{ $remainingMinutes }} minute{{ $remainingMinutes != 1 ? 's ago' : 'ago' }}
                                                             @endif
                                                         @endif
                                                     </small>

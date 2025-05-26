@@ -16,7 +16,11 @@ class OpdController extends BaseController
 {
     public function createBill($id)
     {
-        $billing = Billing::where('opd_master_id', $id)->first();
+      $billing = Billing::select('billings.*', 'opd_master.checkup_type')
+            ->join('opd_master', 'opd_master.id', '=', 'billings.opd_master_id')
+            ->where('billings.opd_master_id', $id)
+            ->first();
+
 
         $serviceData = Service::get();
 
