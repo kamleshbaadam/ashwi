@@ -9,6 +9,18 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        /* Chrome, Safari, Edge, Opera */
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+            -moz-appearance: textfield;
+            }
+
     </style>
     <div class="content-w" style="margin-top: -50px;">
         <div class="content-i">
@@ -144,6 +156,15 @@
                                                         name="case_memo_date"
                                                         value="{{ $billing->case_memo_date ?? date('Y-m-d')}}">
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <b><span class="text-danger">*
+                                                    @if ($billing->checkup_type == 'regular')Regular Checkup Charge 2000 Rs.
+                                                    @elseif ($billing->checkup_type == 'f-up')Follow-up Checkup Charge 1000 Rs.
+                                                    @elseif ($billing->checkup_type == '%80')80% Checkup Charge 1600 Rs.
+                                                    @elseif ($billing->checkup_type == 'foc')Free of Charge Checkup Rs.
+                                                    @endif
+                                                </span></b>                                           
                                             </div>
                                             <div class="table-responsive">
                                                 <table class="table table-padded">
