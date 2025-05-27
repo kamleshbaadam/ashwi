@@ -43,12 +43,12 @@
 
         /* Logo in center of left panel with subtle white background & padding */
         .login-left img.logo {
-            width: 60%;
+            width: 100%;
             /* background: rgba(255, 255, 255, 0.85); */
-            padding: 20px;
+            /* padding: 2px; */
             /* border-radius: 15px; */
             /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); */
-            object-fit: contain;
+            /* object-fit: contain; */
         }
 
         .login-right {
@@ -119,7 +119,8 @@
 <body>
     <div class="login-wrapper">
         <div class="login-left">
-            <img src="{{ url('logo1.png') }}" alt="Hospital Logo" class="logo" />
+            <a href="{{ url('/') }}">
+            <img src="{{ url('logo1.png') }}" alt="Hospital Logo" class="logo" /></a>
         </div>
         <div class="login-right">
             <h2>Welcome Back</h2>
