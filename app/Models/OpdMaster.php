@@ -136,5 +136,9 @@ class OpdMaster extends Model
     {
         return $this->belongsTo(StaffMaster::class, 'doctor_id', 'id');
     }
+    public function opddiagnosis()
+    {
+        return $this->hasMany(OpdDiagnosis::class, 'opd_id', 'id');
+    }
 
 }
