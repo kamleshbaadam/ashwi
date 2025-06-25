@@ -105,7 +105,7 @@
             background: #1e88e5;
             color: white;
             border: none;
-            padding: 12px 28px;
+            padding: 10px;
             border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
@@ -139,10 +139,11 @@
     </style>
 
     <div class="invoice-wrapper" id="invoice-box">
-        <button class="print-btn" onclick="window.print()">Print Bill</button>
+        <button class="print-btn ml-1" onclick="window.print()">Print Bill</button>
+        <button class="print-btn" onclick="window.history.back()">Back</button>
 
         <header class="invoice-header">
-            <h1>Aashwi E.N.T Hospital</h1>
+            <h1>Aashwi E.N.T. Hospital</h1>
             <p>25 Sumangalam Cooperative Housing Society, Opp Drive In Cinema Gate, Bodakdev-380054</p>
         </header>
 
