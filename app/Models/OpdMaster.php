@@ -138,7 +138,7 @@ class OpdMaster extends Model
     }
     public function opddiagnosis()
     {
-        return $this->hasMany(OpdDiagnosis::class, 'opd_id', 'id');
+        return $this->hasMany(OPDDiagnosis::class, 'opd_id', 'id');
     }
 
 }
