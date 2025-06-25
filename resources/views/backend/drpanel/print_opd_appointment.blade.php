@@ -159,7 +159,8 @@
             <div class="info-block text-right">
                 <p><strong>Case No:</strong> {{ ucwords($opdData['opdmaster']['case_no']) }}</p>
                 <p><strong>Age / DOB:</strong> {{ ucwords($opdData['age']) }} /
-                    {{ date('d M, Y', strtotime($opdData['dob'])) }}</p>
+                    {{ date('d M, Y', strtotime($opdData['dob'])) }}
+                </p>
                 <p><strong>Doctor:</strong> Dr. {{ ucwords($opdData['opdmaster']['doctor']['first_name']) }}
                     {{ ucwords($opdData['opdmaster']['doctor']['last_name']) }}
                 </p>
@@ -237,7 +238,10 @@
                 </tbody>
             </table>
         @endif
-
+        @if (!empty($opdData['opdmaster']['advise']))
+            <h5>Advise</h5>
+            {{ ucwords($opdData['opdmaster']['advise']) }}
+        @endif
         <div class="footer-text" style="text-align: right;">
             <p><strong>Created By:</strong> Doctor</p>
         </div>
