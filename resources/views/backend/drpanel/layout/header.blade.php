@@ -25,7 +25,6 @@
                                                     src="{{ asset('backend/drpanel/img/Dr-Mihir-Metha-ENT-1.jpg') }}">
                                             </div>
                                             <div class="logged-user-info-w">
-                                                <div class="logged-user-name">{{$userData->first_name }} {{$userData->last_name }}</div>
                                                 <div class="logged-user-role">Doctor</div>
                                             </div>
                                         </div>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Doctor;
-use App\Models\{DiagnosticMaster, OpdMaster, PatientMaster,MedicineMaster,DiagnosticsMedicineMaster, OPDMedicine, OPDDiagnosis, OPDReport};
+use App\Models\{DiagnosticMaster, OpdMaster, PatientMaster, MedicineMaster, DiagnosticsMedicineMaster, OPDMedicine, OPDDiagnosis, OPDReport};
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,154 +24,136 @@ class OpdController extends BaseController
 			$patientData = PatientMaster::getPatientByID($opdData['patient_id']);
 			$diagnosticsData = DiagnosticMaster::getActiveDiagnosticsByID();
 			$medicineData = MedicineMaster::getActiveMedicineByID();
-			$opdDiagData=OPDDiagnosis::getDiagnosisByOpdID($id);
-			$opdMedicine=OPDMedicine::getMedicineByOpdID($id);
-			$opdReport=OPDReport::getReportByOpdID($id);
-			$historyData=OpdMaster::getHistoryByOPDIdandPatientId($opdData['patient_id'],$id);
+			$opdDiagData = OPDDiagnosis::getDiagnosisByOpdID($id);
+			$opdMedicine = OPDMedicine::getMedicineByOpdID($id);
+			$opdReport = OPDReport::getReportByOpdID($id);
+			$historyData = OpdMaster::getHistoryByOPDIdandPatientId($opdData['patient_id'], $id);
 			$this->patientData = $patientData;
 			$this->opdData = $opdData;
-            $this->diagnosticsData = $diagnosticsData;
-            $this->medicineData = $medicineData;
-            $this->opdDiagData = $opdDiagData;
-            $this->opdMedicine = $opdMedicine;
-            $this->opdReport = $opdReport;
-            $this->historyData = $historyData;
+			$this->diagnosticsData = $diagnosticsData;
+			$this->medicineData = $medicineData;
+			$this->opdDiagData = $opdDiagData;
+			$this->opdMedicine = $opdMedicine;
+			$this->opdReport = $opdReport;
+			$this->historyData = $historyData;
 			return view('backend.drpanel.view_opd_appointment', $this->data);
 
 		} catch (\Exception $e) {
-			return redirect()->back()->with('error',  $e->getMessage());
+			return redirect()->back()->with('error', $e->getMessage());
 		}
 	}
 
 	public function getDiagnosisMedicine(Request $request)
 	{
-		try
-		{
-			$diagnosis_id=$request->id;
-			$diagnosisData=DiagnosticsMedicineMaster::getMedicineByDiagnosisID($diagnosis_id);
+		try {
+			$diagnosis_id = $request->id;
+			$diagnosisData = DiagnosticsMedicineMaster::getMedicineByDiagnosisID($diagnosis_id);
 
-			$medicine=null;
+			$medicine = null;
 
-			if(!empty($diagnosisData))
-			{
-				foreach($diagnosisData as $value)
-				{
-					if(empty($medicine))
-					{
-						$medicine=$value['medicine_id'];
-					}
-					else
-					{
-						$medicine.=','.$value['medicine_id'];
+			if (!empty($diagnosisData)) {
+				foreach ($diagnosisData as $value) {
+					if (empty($medicine)) {
+						$medicine = $value['medicine_id'];
+					} else {
+						$medicine .= ',' . $value['medicine_id'];
 					}
 				}
 			}
 
-			$medicineArr=array();
+			$medicineArr = array();
 
-			if(!empty($medicine))
-			{
-				$medicineArr=explode(',', $medicine);
+			if (!empty($medicine)) {
+				$medicineArr = explode(',', $medicine);
 			}
 
-			$medicineData=MedicineMaster::getMedicineByArrID($medicineArr);
+			$medicineData = MedicineMaster::getMedicineByArrID($medicineArr);
 
 			return response()->json(['status' => true, 'message' => "Get Medicine Successfully", 'data' => $medicineData]);
-		}
-		catch(\Exception $e)
-		{
+		} catch (\Exception $e) {
 			return array(['status' => false, 'message' => $e->getMessage(), 'data' => array()]);
 		}
 	}
 
 	public function opdFormSave(Request $request)
 	{
-		try
-		{
-			$checkOpd=OpdMaster::getRecordByID($request->opd_id);
-			if(empty($checkOpd))
-			{
+		// dd($request->all());
+		try {
+			$checkOpd = OpdMaster::getRecordByID($request->opd_id);
+			if (empty($checkOpd)) {
 				return redirect('doctor/dashboard')->with('error', 'OPD Record Not Found');
 			}
 
-			$opd_id=$request->opd_id;
-			
-			$opdData=OpdMaster::updateOPD($request);
+			$opd_id = $request->opd_id;
 
-			$diagnosiscnt=0;
-			if(!empty($request->diagnosis_id)){
-				$diagnosiscnt=count($request->diagnosis_id) ?? 0;
+			$opdData = OpdMaster::updateOPD($request);
+
+			$diagnosiscnt = 0;
+			if (!empty($request->diagnosis_id)) {
+				$diagnosiscnt = count($request->diagnosis_id) ?? 0;
 			}
 
-			if($diagnosiscnt>0)
-			{
+			if ($diagnosiscnt > 0) {
 				OPDDiagnosis::removeDiagnosisByOpdID($opd_id);
-				$i=0;
-				while($i<$diagnosiscnt)
-				{
-					$newArr=array();
-					$newArr['opd_id']=$opd_id;
+				$i = 0;
+				while ($i < $diagnosiscnt) {
+					$newArr = array();
+					$newArr['opd_id'] = $opd_id;
 
-					$newArr['diagnosis_id']=$request->diagnosis_id[$i];
-					$newArr['diagnosis_name']=$request->diagnosis_name[$i];
+					$newArr['diagnosis_id'] = $request->diagnosis_id[$i];
+					$newArr['diagnosis_name'] = $request->diagnosis_name[$i];
 
 					OPDDiagnosis::addOpdDiagnosis($newArr);
 					$i++;
 				}
 			}
 
-			$medicinecnt=0;
-			if(!empty($request->medicine_id)){
-				$medicinecnt=count($request->medicine_id) ?? 0;
+			$medicinecnt = 0;
+			if (!empty($request->medicine_id)) {
+				$medicinecnt = count($request->medicine_id) ?? 0;
 			}
 
-			if($medicinecnt>0)
-			{
+			if ($medicinecnt > 0) {
 				OPDMedicine::removeMedicineByOpdID($opd_id);
-				$i=0;
-				while($i<$medicinecnt)
-				{
-					$newArr=array();
-					$newArr['opd_id']=$opd_id;
+				$i = 0;
+				while ($i < $medicinecnt) {
+					$newArr = array();
+					$newArr['opd_id'] = $opd_id;
 
-					$newArr['medicine_id']=$request->medicine_id[$i];
-					$newArr['medicine_name']=$request->medicine_name[$i];
-					$newArr['medicine_description']=$request->medicine_description[$i];
-					$newArr['unit']=$request->unit[$i];
-					$newArr['days']=$request->days[$i];
-					$newArr['qty']=$request->qty[$i];
+					$newArr['medicine_id'] = $request->medicine_id[$i];
+					$newArr['medicine_name'] = $request->medicine_name[$i];
+					$newArr['medicine_description'] = $request->medicine_description[$i];
+					$newArr['unit'] = $request->unit[$i];
+					$newArr['days'] = $request->days[$i];
+					$newArr['qty'] = $request->qty[$i];
 
 					OPDMedicine::addOpdMedicine($newArr);
 					$i++;
 				}
 			}
-			$reportcnt=0;
-			if(!empty($request->report_id)){
-				$reportcnt=count($request->report_id) ?? 0;
+			$reportcnt = 0;
+			if (!empty($request->report_id)) {
+				$reportcnt = count($request->report_id) ?? 0;
 			}
 
-			if($reportcnt>0)
-			{
+			if ($reportcnt > 0) {
 				OPDReport::removeReportByOpdID($opd_id);
-				$i=0;
-				while($i<$reportcnt)
-				{
-					$newArr=array();
-					$newArr['opd_id']=$opd_id;
+				$i = 0;
+				while ($i < $reportcnt) {
+					$newArr = array();
+					$newArr['opd_id'] = $opd_id;
 
-					$newArr['report_id']=$request->report_id[$i];
-					$newArr['report_name']=$request->report_name[$i];
-					$newArr['report_description']=$request->report_description[$i];
+					$newArr['report_id'] = $request->report_id[$i];
+					$newArr['report_name'] = $request->report_name[$i];
+					$newArr['report_description'] = $request->report_description[$i];
 
 					OPDReport::addOpdReport($newArr);
 					$i++;
 				}
 			}
 
-			return redirect('doctor/view-opdAppointment/'.$opd_id)->with('success', 'OPD Data Submitted Successfully');
-		}
-		catch(\Exception $e)
-		{
+			return redirect('doctor/view-opdAppointment/' . $opd_id)->with('success', 'OPD Data Submitted Successfully');
+		} catch (\Exception $e) {
 			return redirect()->back()->with('error', $e->getMessage());
 		}
 	}
@@ -183,6 +165,17 @@ class OpdController extends BaseController
 			$this->opdData = $opdrecord;
 
 			return view('backend.drpanel.opd', $this->data);
+		} catch (\Exception $e) {
+			return redirect()->back()->with('error', $e->getMessage());
+		}
+	}
+
+	public function printOpdAppointment($id)
+	{
+		try {
+			$this->opdData = PatientMaster::getPatientDetailsById($id)->with('opdmaster.doctor', 'opddiagnosis', 'opdmedicine', 'opdreport')->first();
+
+			return view('backend.drpanel.print_opd_appointment', $this->data);
 		} catch (\Exception $e) {
 			return redirect()->back()->with('error', $e->getMessage());
 		}

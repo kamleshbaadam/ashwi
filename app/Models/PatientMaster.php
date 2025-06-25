@@ -9,11 +9,11 @@ class PatientMaster extends Model
 {
     use HasFactory;
     protected $table = 'patient_master';
-    
+
     public static function generatePatientId()
     {
         $lastPatient = self::count();
-        $newId = 'AHP' . str_pad($lastPatient+1, 6, '0', STR_PAD_LEFT);
+        $newId = 'AHP' . str_pad($lastPatient + 1, 6, '0', STR_PAD_LEFT);
         return $newId;
     }
 
@@ -52,7 +52,7 @@ class PatientMaster extends Model
         $patientArr->state = $request->state;
         $patientArr->country = $request->country;
         $patientArr->mediclaim = $request->mediclaim;
-        
+
         // Save the patient data (either new or updated)
         $patientArr->save();
 
@@ -63,6 +63,10 @@ class PatientMaster extends Model
     public static function getPatientByID($id)
     {
         return PatientMaster::where('id', $id)->first();
+    }
+
+    public static function getPatientDetailsById($id){
+        return PatientMaster::where('id', $id);
     }
     public static function getAllPatient()
     {
@@ -76,4 +80,21 @@ class PatientMaster extends Model
             ->get();
     }
 
+    public function opdmaster()
+    {
+        return $this->hasOne(OpdMaster::class, 'patient_id','id');
+    }
+
+    public function opddiagnosis()
+    {
+        return $this->hasMany(OpdDiagnosis::class, 'opd_id','id');
+    }
+    public function opdmedicine()
+    {
+        return $this->hasMany(OpdMedicine::class, 'opd_id','id');
+    }
+    public function opdreport()
+    {
+        return $this->hasMany(OpdReport::class, 'opd_id','id');
+    }
 }

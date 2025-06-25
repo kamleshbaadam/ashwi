@@ -553,7 +553,9 @@
                                     <div class="col-md-3 text-end">
                                         <button
                                             class="btn btn-primary me-1"style="font-size: 12px !important;">Submit</button>
-                                        <button class="btn btn-info"style="font-size: 12px !important;">Print</button>
+                                            <a href="{{ url('/doctor/print-opd-appointment/' . $opdData['id']) }}" class="btn btn-info"
+                                                style="font-size: 12px !important;">Print
+                                            </a>
                                     </div>
                                 </div>
                             </div>

@@ -18,6 +18,7 @@ Route::group(['prefix' => 'doctor'], function () {
             Route::POST('getdiagnosismedicine','getDiagnosisMedicine');
             Route::POST('opdFormSave','opdFormSave');
             Route::get('currunt-opd','curruntOpd');
+            Route::get('/print-opd-appointment/{id}', 'printOpdAppointment');
         });
     });
 });
