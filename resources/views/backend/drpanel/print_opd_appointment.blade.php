@@ -156,11 +156,12 @@
             </div>
             <div class="info-block text-right">
                 <p><strong>Case No:</strong> {{ $opdData['opdmaster']['case_no'] }}</p>
-                <p><strong>Age / DOB:</strong> {{ $opdData['age'] }} / {{ $opdData['dob'] }}</p>
+                <p><strong>Age / DOB:</strong> {{ $opdData['age'] }} / {{ date('d M, Y', strtotime($opdData['dob'])) }}</p>
                 <p><strong>Doctor:</strong> Dr. {{ $opdData['opdmaster']['doctor']['first_name'] }}
                     {{ $opdData['opdmaster']['doctor']['last_name'] }}</p>
                 <p><strong>Visit Date:</strong>
-                    {{ \Carbon\Carbon::parse($opdData['opdmaster']['visit_date'])->format('d M, Y') }}</p>
+                    {{ date('d M, Y', strtotime($opdData['opdmaster']['created_at'])) }}
+</p>
             </div>
         </section>
 
