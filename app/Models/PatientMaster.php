@@ -87,14 +87,14 @@ class PatientMaster extends Model
 
     public function opddiagnosis()
     {
-        return $this->hasMany(OpdDiagnosis::class, 'opd_id','id');
+        return $this->hasMany(OPDDiagnosis::class, 'opd_id','id');
     }
     public function opdmedicine()
     {
-        return $this->hasMany(OpdMedicine::class, 'opd_id','id');
+        return $this->hasMany(OPDMedicine::class, 'opd_id','id');
     }
     public function opdreport()
     {
-        return $this->hasMany(OpdReport::class, 'opd_id','id');
+        return $this->hasMany(OPDReport::class, 'opd_id','id');
     }
 }
