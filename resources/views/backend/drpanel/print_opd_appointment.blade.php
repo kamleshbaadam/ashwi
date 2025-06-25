@@ -148,24 +148,28 @@
 
         <section class="info-section">
             <div class="info-block">
-                <p><strong>Patient Name:</strong> {{ ucfirst($opdData['name_prefix']) }} {{ $opdData['first_name'] }}
-                    {{ $opdData['last_name'] }}</p>
-                <p><strong>Patient ID:</strong> {{ $opdData['patient_id'] }}</p>
-                <p><strong>Phone:</strong> {{ $opdData['phone_no'] }}</p>
-                <p><strong>Gender:</strong> {{ ucfirst($opdData['gender']) }}</p>
+                <p><strong>Patient Name:</strong> {{ ucwords($opdData['name_prefix']) }}
+                    {{ ucwords($opdData['first_name']) }}
+                    {{ ucwords($opdData['last_name']) }}
+                </p>
+                <p><strong>Patient ID:</strong> {{ ucwords($opdData['patient_id']) }}</p>
+                <p><strong>Phone:</strong> {{ ucwords($opdData['phone_no']) }}</p>
+                <p><strong>Gender:</strong> {{ ucwords($opdData['gender']) }}</p>
             </div>
             <div class="info-block text-right">
-                <p><strong>Case No:</strong> {{ $opdData['opdmaster']['case_no'] }}</p>
-                <p><strong>Age / DOB:</strong> {{ $opdData['age'] }} / {{ date('d M, Y', strtotime($opdData['dob'])) }}</p>
-                <p><strong>Doctor:</strong> Dr. {{ $opdData['opdmaster']['doctor']['first_name'] }}
-                    {{ $opdData['opdmaster']['doctor']['last_name'] }}</p>
+                <p><strong>Case No:</strong> {{ ucwords($opdData['opdmaster']['case_no']) }}</p>
+                <p><strong>Age / DOB:</strong> {{ ucwords($opdData['age']) }} /
+                    {{ date('d M, Y', strtotime($opdData['dob'])) }}</p>
+                <p><strong>Doctor:</strong> Dr. {{ ucwords($opdData['opdmaster']['doctor']['first_name']) }}
+                    {{ ucwords($opdData['opdmaster']['doctor']['last_name']) }}
+                </p>
                 <p><strong>Visit Date:</strong>
                     {{ date('d M, Y', strtotime($opdData['opdmaster']['created_at'])) }}
-</p>
+                </p>
             </div>
         </section>
 
-    
+
         <h5>Diagnosis</h5>
         <table>
             <thead>
@@ -177,14 +181,14 @@
             <tbody>
                 @foreach($opdData['opddiagnosis'] as $index => $diagnosis)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $diagnosis['diagnosis_name'] }}</td>
+                        <td>{{ ucwords($index + 1) }}</td>
+                        <td>{{ ucwords($diagnosis['diagnosis_name']) }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-    
+
         <h5>Medicines</h5>
         <table>
             <thead>
@@ -200,18 +204,18 @@
             <tbody>
                 @foreach($opdData['opdmedicine'] as $index => $medicine)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $medicine['medicine_name'] }}</td>
-                        <td>{{ $medicine['medicine_description'] }}</td>
-                        <td>{{ $medicine['unit'] }}</td>
-                        <td>{{ $medicine['days'] }}</td>
-                        <td>{{ $medicine['qty'] }}</td>
+                        <td>{{ ucwords($index + 1) }}</td>
+                        <td>{{ ucwords($medicine['medicine_name']) }}</td>
+                        <td>{{ ucwords($medicine['medicine_description']) }}</td>
+                        <td>{{ ucwords($medicine['unit']) }}</td>
+                        <td>{{ ucwords($medicine['days']) }}</td>
+                        <td>{{ ucwords($medicine['qty']) }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-    
+
         @if(!empty($opdData['opdreport']))
             <h5>Reports</h5>
             <table>
@@ -225,9 +229,9 @@
                 <tbody>
                     @foreach($opdData['opdreport'] as $index => $report)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $report['report_name'] }}</td>
-                            <td>{{ $report['report_description'] }}</td>
+                            <td>{{ ucwords($index + 1) }}</td>
+                            <td>{{ ucwords($report['report_name']) }}</td>
+                            <td>{{ ucwords($report['report_description']) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
