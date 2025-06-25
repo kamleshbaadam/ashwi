@@ -139,12 +139,13 @@
     </style>
 
     <div class="invoice-wrapper" id="invoice-box">
-        <button class="print-btn ml-1" onclick="window.print()">Print Bill</button>
-        <button class="print-btn" onclick="window.history.back()">Back</button>
-
-        <header class="invoice-header">
+        <header class="invoice-header" style="display: flex; align-items: center; justify-content: space-between;">
+            <button class="print-btn" style="margin: 0;" onclick="window.history.back()">Back</button>
+            <div style="flex: 1; text-align: center;">
             <h1>Aashwi E.N.T. Hospital</h1>
             <p>25 Sumangalam Cooperative Housing Society, Opp Drive In Cinema Gate, Bodakdev-380054</p>
+            </div>
+            <button class="print-btn" style="margin: 0;" onclick="window.print()">Print Bill</button>
         </header>
 
         <section class="info-section">
