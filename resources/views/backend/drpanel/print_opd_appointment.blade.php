@@ -142,36 +142,45 @@
         <header class="invoice-header" style="display: flex; align-items: center; justify-content: space-between;">
             <button class="print-btn" style="margin: 0;" onclick="window.history.back()">Back</button>
             <div style="flex: 1; text-align: center;">
-            <h1>Aashwi E.N.T. Hospital</h1>
-            <p>25 Sumangalam Cooperative Housing Society, Opp Drive In Cinema Gate, Bodakdev-380054</p>
+                <h1>Aashwi E.N.T. Hospital</h1>
+                <p>25 Sumangalam Cooperative Housing Society, Opp Drive In Cinema Gate, Bodakdev-380054</p>
             </div>
             <button class="print-btn" style="margin: 0;" onclick="window.print()">Print Bill</button>
         </header>
 
         <section class="info-section">
             <div class="info-block">
-                <p><strong>Patient Name:</strong> {{ ucwords($opdData['name_prefix']) }}
-                    {{ ucwords($opdData['first_name']) }}
-                    {{ ucwords($opdData['last_name']) }}
+                <p><strong>Patient Name:</strong>
+                    {{ ucwords($opdData['name_prefix'] ?? '') }}
+                    {{ ucwords($opdData['first_name'] ?? '') }}
+                    {{ ucwords($opdData['last_name'] ?? '') }}
                 </p>
-                <p><strong>Patient ID:</strong> {{ ucwords($opdData['patient_id']) }}</p>
-                <p><strong>Phone:</strong> {{ ucwords($opdData['phone_no']) }}</p>
-                <p><strong>Gender:</strong> {{ ucwords($opdData['gender']) }}</p>
+                <p><strong>Patient ID:</strong> {{ ucwords($opdData['patient_id'] ?? 'N/A') }}</p>
+                <p><strong>Phone:</strong> {{ ucwords($opdData['phone_no'] ?? 'N/A') }}</p>
+                <p><strong>Gender:</strong> {{ ucwords($opdData['gender'] ?? 'N/A') }}</p>
             </div>
+
             <div class="info-block text-right">
-                <p><strong>Case No:</strong> {{ ucwords($opdData['opdmaster']['case_no']) }}</p>
-                <p><strong>Age / DOB:</strong> {{ ucwords($opdData['age']) }} /
-                    {{ date('d M, Y', strtotime($opdData['dob'])) }}
+                <p><strong>Case No:</strong>
+                    {{ !empty($opdData['opdmaster']) ? ucwords($opdData['opdmaster']['case_no'] ?? 'N/A') : 'N/A' }}
                 </p>
-                <p><strong>Doctor:</strong> Dr. {{ ucwords($opdData['opdmaster']['doctor']['first_name']) }}
-                    {{ ucwords($opdData['opdmaster']['doctor']['last_name']) }}
+                <p><strong>Age / DOB:</strong>
+                    {{ ucwords($opdData['age'] ?? 'N/A') }} /
+                    {{ !empty($opdData['dob']) ? date('d M, Y', strtotime($opdData['dob'])) : 'N/A' }}
+                </p>
+                <p><strong>Doctor:</strong>
+                    @if (!empty($opdData['opdmaster']) && !empty($opdData['opdmaster']['doctor']))
+                        Dr. {{ ucwords($opdData['opdmaster']['doctor']['first_name'] ?? '') }}
+                        {{ ucwords($opdData['opdmaster']['doctor']['last_name'] ?? '') }}
+                    @else
+                        N/A
+                    @endif
                 </p>
                 <p><strong>Visit Date:</strong>
-                    {{ date('d M, Y', strtotime($opdData['opdmaster']['created_at'])) }}
+                    {{ !empty($opdData['opdmaster']) ? date('d M, Y', strtotime($opdData['opdmaster']['created_at'] ?? null)) : 'N/A' }}
                 </p>
             </div>
         </section>
-
 
         <h5>Diagnosis</h5>
         <table>
@@ -182,15 +191,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($opdData['opddiagnosis'] as $index => $diagnosis)
+                @foreach ($opdData['opddiagnosis'] ?? [] as $index => $diagnosis)
                     <tr>
-                        <td>{{ ucwords($index + 1) }}</td>
-                        <td>{{ ucwords($diagnosis['diagnosis_name']) }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ ucwords($diagnosis['diagnosis_name'] ?? 'N/A') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
 
         <h5>Medicines</h5>
         <table>
@@ -205,21 +213,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($opdData['opdmedicine'] as $index => $medicine)
+                @foreach ($opdData['opdmedicine'] ?? [] as $index => $medicine)
                     <tr>
-                        <td>{{ ucwords($index + 1) }}</td>
-                        <td>{{ ucwords($medicine['medicine_name']) }}</td>
-                        <td>{{ ucwords($medicine['medicine_description']) }}</td>
-                        <td>{{ ucwords($medicine['unit']) }}</td>
-                        <td>{{ ucwords($medicine['days']) }}</td>
-                        <td>{{ ucwords($medicine['qty']) }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ ucwords($medicine['medicine_name'] ?? 'N/A') }}</td>
+                        <td>{{ ucwords($medicine['medicine_description'] ?? 'N/A') }}</td>
+                        <td>{{ ucwords($medicine['unit'] ?? 'N/A') }}</td>
+                        <td>{{ ucwords($medicine['days'] ?? 'N/A') }}</td>
+                        <td>{{ ucwords($medicine['qty'] ?? 'N/A') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-
-        @if(!empty($opdData['opdreport']))
+        @if (!empty($opdData['opdreport']))
             <h5>Reports</h5>
             <table>
                 <thead>
@@ -230,22 +237,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($opdData['opdreport'] as $index => $report)
+                    @foreach ($opdData['opdreport'] as $index => $report)
                         <tr>
-                            <td>{{ ucwords($index + 1) }}</td>
-                            <td>{{ ucwords($report['report_name']) }}</td>
-                            <td>{{ ucwords($report['report_description']) }}</td>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ ucwords($report['report_name'] ?? 'N/A') }}</td>
+                            <td>{{ ucwords($report['report_description'] ?? 'N/A') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         @endif
+
         @if (!empty($opdData['opdmaster']['advise']))
             <h5>Advise</h5>
             {{ ucwords($opdData['opdmaster']['advise']) }}
         @endif
+
         <div class="footer-text" style="text-align: right;">
             <p><strong>Created By:</strong> Doctor</p>
         </div>
     </div>
+
 @endsection
