@@ -9,15 +9,15 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="element-wrapper">
-                            <h6 class="element-header">Add New Service
+                            <h6 class="element-header">@if(!empty($servicesData['id'])) Update Service @else Add New Service @endif
                                 </h6>
                             <div class="element-box">
                                 <form autocomplete="off" action="{{ url('admin/addService') }}" method="POST">
                                     @include('flash-message')
                                     <input type="hidden" value="{{ $servicesData['id'] ?? '' }}" hidden name="service_id">
                                     @csrf
-                                    <h5 class="form-header">Add New Service
-                                        Service </h5>
+                                    <h5 class="form-header">@if(!empty($servicesData['id'])) Update @else Add New @endif Service
+                                        </h5>
                                     <div class="form-desc">Discharge best employed your phase each the of shine.
                                         Be met even reason consider logbook redesigns. Never a turned interfaces
                                         among asking</div>
@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="form-buttons-w">
-                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                        <button class="btn btn-primary" type="submit">@if(!empty($servicesData['id'])) Update @else Add @endif Service</button>
                                     </div>
                                 </form>
                             </div>

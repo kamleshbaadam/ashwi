@@ -414,8 +414,8 @@
                         <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                         <div class="sub-menu-i">
                             <ul class="sub-menu">
-                                <li><a href="Add_Resource.html">Add Resource</a></li>
-                                <li><a href="resource-list.html">Resource List</a></li>
+                                <li><a href="{{url('admin/add-resource')}}">Add Resource</a></li>
+                                <li><a href="{{url('admin/resources/list')}}">Resource List</a></li>
                             </ul>
                         </div>
                 </li>
@@ -514,7 +514,7 @@
             </div>
         </li>
 
-        <li class="has-sub-menu"><a href="Instrument_management.html">
+        <li class="has-sub-menu"><a href="javascript:">
                 <div class="icon-w">
                     <div class="os-icon os-icon-zap"></div>
                 </div><span>Instrument management</span>
@@ -524,15 +524,15 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-zap"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li><a href="Add.Instrument.html">Add Instrument </a></li>
-                        <!-- <li><a href="lis.html">List Appoinment</a></li> -->
+                        <li><a href="{{url('admin/add-instrument')}}">Add Instrument</a></li>
+                        <li><a href="{{url('admin/instruments/list')}}">Instrument List</a></li>
                     </ul>
 
                 </div>
             </div>
         </li>
 
-        <li class="has-sub-menu"><a href="servies_management.html">
+        <li class="has-sub-menu"><a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-zap"></div>
                 </div><span>Services management</span>

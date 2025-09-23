@@ -9,5 +9,12 @@ class ResourceManagement extends Model
 {
     use HasFactory;
     protected $table = 'resource_management';
-    protected $guarded = [];
+    
+    protected $fillable = [
+        'name',
+        'uses',
+        'maintainance_date',
+        'amount',
+        'quantity',
+    ];
 }

@@ -57,5 +57,19 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('add-service/{id}', 'addService');
 			Route::get('delete-service/{id}', 'deleteService');
 		});
+		Route::controller(ResourceManagmentController::class)->group(function () {
+			Route::get('resources/list', 'resourcesList');
+			Route::get('add-resource', 'addResource');
+			Route::post('addResource', 'storeResource');
+			Route::get('add-resource/{id}', 'addResource');
+			Route::get('delete-resource/{id}', 'deleteResource');
+		});
+		Route::controller(InstrumentController::class)->group(function () {
+			Route::get('instruments/list', 'instrumentsList');
+			Route::get('add-instrument', 'addInstrument');
+			Route::post('addInstrument', 'storeInstrument');
+			Route::get('add-instrument/{id}', 'addInstrument');
+			Route::get('delete-instrument/{id}', 'deleteInstrument');
+		});
 	});
 });
