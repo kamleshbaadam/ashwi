@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Route;
@@ -33,23 +34,28 @@ Route::group(['prefix' => 'admin'], function () {
 			Route::get('add_medicine_category', 'addMedicineCategory');
 			Route::post('store_medicine_category', 'storeMedicineCategory');
 			Route::get('add_medicine_category/{id}', 'addMedicineCategory');
-			Route::get('add_medicine','addMedicine');
-			Route::post('store_medicine','storeMedicine');
-			Route::get('add_medicine/{id}','addMedicine');
+			Route::get('add_medicine', 'addMedicine');
+			Route::post('store_medicine', 'storeMedicine');
+			Route::get('add_medicine/{id}', 'addMedicine');
 		});
 		Route::controller(DiagnosticsController::class)->group(function () {
-			Route::get('diagnostics_list','diagnosticsList');
-			Route::get('add_diagnostics','addDiagnostics');
-			Route::post('store_diagnostics','storeDiagnostics');
-			Route::get('add_diagnostics/{id}','addDiagnostics');
-
+			Route::get('diagnostics_list', 'diagnosticsList');
+			Route::get('add_diagnostics', 'addDiagnostics');
+			Route::post('store_diagnostics', 'storeDiagnostics');
+			Route::get('add_diagnostics/{id}', 'addDiagnostics');
 		});
 		Route::controller(DiagnosticsMedicineController::class)->group(function () {
-			Route::get('diagnostics_medicine_list','diagnosticsMedicineList');
-			Route::get('add_diagnostics_medicine','adddiagnosticsMedicine');
-			Route::get('add_diagnostics_medicine/{id}','adddiagnosticsMedicine');
-			Route::post('store_diagnostics_medicine','storeDiagnosticsMedicine');
+			Route::get('diagnostics_medicine_list', 'diagnosticsMedicineList');
+			Route::get('add_diagnostics_medicine', 'adddiagnosticsMedicine');
+			Route::get('add_diagnostics_medicine/{id}', 'adddiagnosticsMedicine');
+			Route::post('store_diagnostics_medicine', 'storeDiagnosticsMedicine');
+		});
+		Route::controller(AdminServiceController::class)->group(function () {
+			Route::get('services/list', 'servicesList');
+			Route::get('add-service', 'addService');
+			Route::post('addService', 'storeService');
+			Route::get('add-service/{id}', 'addService');
+			Route::get('delete-service/{id}', 'deleteService');
 		});
 	});
-
 });

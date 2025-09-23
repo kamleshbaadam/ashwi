@@ -542,7 +542,7 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-zap"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li><a href="Add.servies.html">Add Servies </a></li>
+                        <li><a href="{{url('admin/services/list')}}">Add Servies </a></li>
                         <!-- <li><a href="lis.html">List Appoinment</a></li> -->
                     </ul>
 
